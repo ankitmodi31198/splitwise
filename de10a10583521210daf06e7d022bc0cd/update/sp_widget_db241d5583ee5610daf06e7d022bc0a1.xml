@@ -53,37 +53,45 @@
       }
     }
   }
+
+  /* Group Item Styling */
+  .group-item {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
+    padding: 16px; /* Added padding */
+    transition: all 0.3s ease-in-out;
+    margin-top: 5px;
+
+    &amp;:hover {
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .group-item-card {
+      h6 {
+        color: #00796b;
+        margin: 0;
+      }
+
+      p {
+        font-size: 0.85rem;
+        color: #757575;
+      }
+    }
+  }
+
+  .text-success {
+    color: #5cb85c
+  }
+
+  .text-danger {
+    color: #d9534f;
+  }
 }
 
 
-
-/* Group Item Styling */
-.group-item {
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
-  padding: 16px; /* Added padding */
-  transition: all 0.3s ease-in-out;
-  margin-top: 5px;
-
-  &amp;:hover {
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    transform: translateY(-3px);
-  }
-
-  .group-item-card {
-    h6 {
-      color: #00796b;
-      margin: 0;
-    }
-
-    p {
-      font-size: 0.85rem;
-      color: #757575;
-    }
-  }
-}
 
 </css>
         <data_table>sp_instance</data_table>
@@ -124,8 +132,6 @@
 			if (grGroup.get(grGroupMembers.getValue('group'))) {
 
 
-
-
 				// Query the sn_splitwise_group_members table to get the group member records for the current user
 				var groupMemberSysIds = getGroupMemberSysIds(userSysId, grGroup.getValue('sys_id'));
 
@@ -137,9 +143,6 @@
 					group.totalYouOwe = 0;
 					group.totalOwedToYou = 0;
 				}
-
-
-
 
 
 				group.sys_id = grGroup.getValue('sys_id');
@@ -158,9 +161,6 @@
 	if (data.userSysId) {
 		data.groups = getUserGroups(data.userSysId);
 	}
-
-
-
 
 
 
@@ -253,22 +253,24 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2024-12-17 10:36:00</sys_created_on>
         <sys_id>db241d5583ee5610daf06e7d022bc0a1</sys_id>
-        <sys_mod_count>42</sys_mod_count>
+        <sys_mod_count>46</sys_mod_count>
         <sys_name>Splitwise Group List</sys_name>
         <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
         <sys_policy/>
         <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
         <sys_update_name>sp_widget_db241d5583ee5610daf06e7d022bc0a1</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2024-12-18 10:21:38</sys_updated_on>
+        <sys_updated_on>2024-12-19 11:19:03</sys_updated_on>
         <template><![CDATA[<div class="splitwise-my-groups-container mt-4">
   <!-- Header Section -->
   <div class="my-groups-header d-flex justify-content-between align-items-center">
     <h3 class="mb-0 font-weight-bold text-white">My Groups</h3>
     <!-- Circular Add Group Button -->
-    <button class="btn add-group-btn">
+    <!--
+		<button class="btn add-group-btn">
       <i class="fa fa-plus"></i>
     </button>
+		-->
   </div>
 
   <!-- Groups List -->

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_application">
+    <sys_app_application action="DELETE">
+        <active>true</active>
+        <category display_value="Custom Applications">e0355b31ef303000a61d5a3615c0fb78</category>
+        <description/>
+        <device_type>browser</device_type>
+        <hint/>
+        <name>Groups</name>
+        <order>100</order>
+        <roles>sn_splitwise.groups_user</roles>
+        <sys_class_name>sys_app_application</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-04 06:41:18</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>66c1a98583521210daf06e7d022bc0d6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Groups</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sys_app_application_66c1a98583521210daf06e7d022bc0d6</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-04 06:41:18</sys_updated_on>
+        <title>Groups</title>
+        <view_name/>
+    </sys_app_application>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</application>
+        <file_path/>
+        <instance_id>add57f3000521210ac1fc988b26642fa</instance_id>
+        <instance_name>glide_db_dump</instance_name>
+        <name>sys_app_application_66c1a98583521210daf06e7d022bc0d6</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_application"><sys_app_application action="INSERT_OR_UPDATE"><active>true</active><category display_value="Custom Applications">e0355b31ef303000a61d5a3615c0fb78</category><description/><device_type>browser</device_type><hint/><name>Groups</name><order>100</order><roles>sn_splitwise.groups_user</roles><sys_class_name>sys_app_application</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2024-12-04 06:41:18</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>66c1a98583521210daf06e7d022bc0d6</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Groups</sys_name><sys_overrides/><sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package><sys_policy/><sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope><sys_update_name>sys_app_application_66c1a98583521210daf06e7d022bc0d6</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2024-12-04 06:41:18</sys_updated_on><title>Groups</title><view_name/></sys_app_application></record_update>]]></payload>
+        <payload_hash>-1914919643</payload_hash>
+        <record_name>Groups</record_name>
+        <reverted_from/>
+        <source>da10a10583521210daf06e7d022bc0d0</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-04 06:41:18</sys_created_on>
+        <sys_id>bac1a98583521210daf06e7d022bc0da</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1939066d2e00000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-04 06:41:18</sys_updated_on>
+        <type>Application Menu</type>
+        <update_guid>7ec1a98584521210b1f1a323121899d9</update_guid>
+        <update_guid_history>7ec1a98584521210b1f1a323121899d9:-1914919643</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Groups">e6d3614983521210daf06e7d022bc097</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-04 06:50:18</sys_created_on>
+        <sys_db_object display_value="" name="sys_app_application">sys_app_application</sys_db_object>
+        <sys_id>0053123c03484f6a802e1c91052cba69</sys_id>
+        <sys_metadata>66c1a98583521210daf06e7d022bc0d6</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Groups</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_scope_delete display_value="">1bbf902f56684a4e8bdca6050439e3c4</sys_scope_delete>
+        <sys_update_name>sys_app_application_66c1a98583521210daf06e7d022bc0d6</sys_update_name>
+        <sys_update_version display_value="sys_app_application_66c1a98583521210daf06e7d022bc0d6">bac1a98583521210daf06e7d022bc0da</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-04 06:50:18</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

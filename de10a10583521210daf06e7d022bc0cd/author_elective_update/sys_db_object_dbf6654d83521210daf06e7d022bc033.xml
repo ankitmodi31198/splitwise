@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_db_object">
+    <sys_db_object action="DELETE">
+        <access>public</access>
+        <actions_access>false</actions_access>
+        <alter_access>false</alter_access>
+        <caller_access/>
+        <client_scripts_access>false</client_scripts_access>
+        <configuration_access>false</configuration_access>
+        <create_access>false</create_access>
+        <create_access_controls>true</create_access_controls>
+        <delete_access>false</delete_access>
+        <filter_extension/>
+        <is_extendable>false</is_extendable>
+        <label>Group test</label>
+        <live_feed_enabled>false</live_feed_enabled>
+        <name>sn_splitwise_group_test</name>
+        <number_ref/>
+        <provider_class/>
+        <read_access>true</read_access>
+        <scriptable_table>false</scriptable_table>
+        <super_class/>
+        <sys_class_name>sys_db_object</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-04 07:04:23</sys_created_on>
+        <sys_id>dbf6654d83521210daf06e7d022bc033</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Group test</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sys_db_object_dbf6654d83521210daf06e7d022bc033</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-04 07:04:23</sys_updated_on>
+        <update_access>false</update_access>
+        <user_role display_value="sn_splitwise.group_test_user" name="sn_splitwise.group_test_user">bc17a14d83521210daf06e7d022bc035</user_role>
+        <ws_access>true</ws_access>
+    </sys_db_object>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</application>
+        <file_path/>
+        <instance_id>add57f3000521210ac1fc988b26642fa</instance_id>
+        <instance_name>glide_db_dump</instance_name>
+        <name>sys_db_object_dbf6654d83521210daf06e7d022bc033</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_db_object"><sys_db_object action="INSERT_OR_UPDATE"><access>public</access><actions_access>false</actions_access><alter_access>false</alter_access><caller_access/><client_scripts_access>false</client_scripts_access><configuration_access>false</configuration_access><create_access>false</create_access><create_access_controls>true</create_access_controls><delete_access>false</delete_access><filter_extension/><is_extendable>false</is_extendable><label>Group test</label><live_feed_enabled>false</live_feed_enabled><name>sn_splitwise_group_test</name><number_ref/><provider_class/><read_access>true</read_access><scriptable_table>false</scriptable_table><super_class/><sys_class_name>sys_db_object</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2024-12-04 07:04:23</sys_created_on><sys_id>dbf6654d83521210daf06e7d022bc033</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Group test</sys_name><sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package><sys_policy/><sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope><sys_update_name>sys_db_object_dbf6654d83521210daf06e7d022bc033</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2024-12-04 07:04:23</sys_updated_on><update_access>false</update_access><user_role display_value="sn_splitwise.group_test_user" name="sn_splitwise.group_test_user">bc17a14d83521210daf06e7d022bc035</user_role><ws_access>true</ws_access></sys_db_object></record_update>]]></payload>
+        <payload_hash>-8515486</payload_hash>
+        <record_name>Group test</record_name>
+        <reverted_from/>
+        <source>da10a10583521210daf06e7d022bc0d0</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-04 07:04:24</sys_created_on>
+        <sys_id>5917294d83521210daf06e7d022bc014</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>193907bfc1b0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-04 07:04:24</sys_updated_on>
+        <type>Table</type>
+        <update_guid>5d17294d715212103f619b092d24ae13</update_guid>
+        <update_guid_history>5d17294d715212103f619b092d24ae13:-8515486</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-04 07:04:48</sys_created_on>
+        <sys_db_object display_value="" name="sys_db_object">sys_db_object</sys_db_object>
+        <sys_id>0a73dc449d3941d6809e24f8aa282b59</sys_id>
+        <sys_metadata>dbf6654d83521210daf06e7d022bc033</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Group test</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_scope_delete display_value="">1bbf902f56684a4e8bdca6050439e3c4</sys_scope_delete>
+        <sys_update_name>sys_db_object_dbf6654d83521210daf06e7d022bc033</sys_update_name>
+        <sys_update_version display_value="sys_db_object_dbf6654d83521210daf06e7d022bc033">5917294d83521210daf06e7d022bc014</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-04 07:04:48</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

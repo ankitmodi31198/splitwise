@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="4ce852c183161210daf06e7d022bc0f0" label="Settlements" max_length="40" name="sn_splitwise_settlements" type="collection">
+        <element label="Payer Group Member" mandatory="true" max_length="32" name="payer_group_member" reference="sn_splitwise_group_members" reference_qual="javascript:new FetchGroupMembersAsPerGroup().getGroupMembers(current.expense_distribution.expense.group);" type="reference" use_reference_qualifier="advanced"/>
+        <element label="Payee Group Member" mandatory="true" max_length="32" name="payee_group_member" reference="sn_splitwise_group_members" reference_qual="javascript:new FetchGroupMembersAsPerGroup().getGroupMembers(current.expense_distribution.expense.group);" type="reference" use_reference_qualifier="advanced"/>
+        <element label="Paid Amount" mandatory="true" max_length="10" name="paid_amount" type="integer"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" read_only="true" type="string"/>
+        <element label="Note" max_length="1000" name="note" type="string"/>
+        <element label="Expense Distribution" mandatory="true" max_length="32" name="expense_distribution" reference="sn_splitwise_expense_distribution" type="reference"/>
+        <index name="index">
+            <element name="expense_distribution"/>
+        </index>
+        <index name="index2">
+            <element name="payee_group_member"/>
+        </index>
+        <index name="index3">
+            <element name="payer_group_member"/>
+        </index>
+    </element>
+</database>

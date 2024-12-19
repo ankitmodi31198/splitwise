@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="7e9cc28983d21210daf06e7d022bc00a" label="Expense Distribution" max_length="40" name="sn_splitwise_expense_distribution" type="collection">
+        <element default="False" label="Is Settled" max_length="40" name="is_settled" type="boolean"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" display="true" label="Number" max_length="40" name="number" type="string"/>
+        <element label="Share Amount" mandatory="true" max_length="10" name="share_amount" type="integer"/>
+        <element label="Expense" mandatory="true" max_length="32" name="expense" reference="sn_splitwise_expenses" type="reference"/>
+        <element label="Note" max_length="1000" name="note" type="string"/>
+        <element label="Group Member" mandatory="true" max_length="32" name="group_member" reference="sn_splitwise_group_members" reference_qual="javascript:new FetchGroupMembersAsPerGroup().getGroupMembers(current.expense.group);" type="reference" use_reference_qualifier="advanced"/>
+        <index name="index">
+            <element name="expense"/>
+        </index>
+        <index name="index2">
+            <element name="group_member"/>
+        </index>
+    </element>
+</database>

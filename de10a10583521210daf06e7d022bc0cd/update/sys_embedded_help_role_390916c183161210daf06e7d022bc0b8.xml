@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_embedded_help_role">
+    <sys_embedded_help_role action="INSERT_OR_UPDATE">
+        <order>1000</order>
+        <role display_value="sn_splitwise.settlements_user" name="sn_splitwise.settlements_user">bd099e8183161210daf06e7d022bc071</role>
+        <sys_class_name>sys_embedded_help_role</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-04 10:42:37</sys_created_on>
+        <sys_id>390916c183161210daf06e7d022bc0b8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>bd099e8183161210daf06e7d022bc071</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sys_embedded_help_role_390916c183161210daf06e7d022bc0b8</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-04 10:42:37</sys_updated_on>
+    </sys_embedded_help_role>
+</record_update>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_number">
+    <sys_number action="INSERT_OR_UPDATE">
+        <category display_value="" name="sn_splitwise_groups">sn_splitwise_groups</category>
+        <maximum_digits>7</maximum_digits>
+        <number>1</number>
+        <prefix>GRP</prefix>
+        <sys_class_name>sys_number</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-07 21:55:56</sys_created_on>
+        <sys_id>72afc492835e5210daf06e7d022bc04b</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>GRP</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sys_number_72afc492835e5210daf06e7d022bc04b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-07 22:01:12</sys_updated_on>
+    </sys_number>
+</record_update>

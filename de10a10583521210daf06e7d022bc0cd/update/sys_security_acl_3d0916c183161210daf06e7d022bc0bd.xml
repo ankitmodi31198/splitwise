@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+    <sys_security_acl action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <admin_overrides>true</admin_overrides>
+        <advanced>true</advanced>
+        <applies_to/>
+        <condition/>
+        <controlled_by_refs/>
+        <decision_type>allow</decision_type>
+        <description>Any user involved in the settlement or group creator can update it</description>
+        <local_or_existing>Local</local_or_existing>
+        <name>sn_splitwise_settlements</name>
+        <operation display_value="create">create</operation>
+        <script><![CDATA[answer = true;
+// (function executeRule() {
+// // return false;
+// // Get the current user ID
+// var currentUserID = gs.getUserID();
+// var currentUserName = gs.getUserName();
+
+// // Check if the user is the payer for the expense
+// var isPayer = (current.expense_distribution.expense.paid_by_user.user == currentUserID);
+
+// // Check if the user is the creator of the group associated with the expense
+// var isGroupCreator = (current.expense_distribution.expense.group.created_by == currentUserName);
+
+// // Check if the user is a group member in the expense distribution
+// var isGroupMember = false;
+// var groupMemberGR = new GlideRecord('sn_splitwise_group_members');
+// groupMemberGR.addQuery('group', current.expense_distribution.expense.group.sys_id);
+// groupMemberGR.addQuery('user', currentUserID);
+// groupMemberGR.query();
+// if (groupMemberGR.next()) {
+//     isGroupMember = true;
+// }
+
+// // Grant create access if any condition is true
+// answer = isPayer || isGroupCreator || isGroupMember;
+// })();
+
+
+
+
+
+
+// (function() {
+//     var currentUserId = gs.getUserID();
+// 	var currentUserName = gs.getUserName();
+
+// 	// Check if the user is involved in the expense distribution
+// 	if (current.expense_distribution) {
+// 		var expenseDistributionGr = new GlideRecord('sn_splitwise_expense_distribution');
+// 		if (expenseDistributionGr.get(current.expense_distribution)) {
+// 			var groupMemberGr = new GlideRecord('sn_splitwise_group_members');
+// 			groupMemberGr.addQuery('sys_id', expenseDistributionGr.group_member);
+// 			groupMemberGr.addQuery('user', currentUserId);
+// 			groupMemberGr.query();
+// 			if (groupMemberGr.next()) {
+// 				answer = true;
+// 				return;
+// 			}
+// 		}
+
+// 		// Check if the user is the group creator
+// 		var expenseGr = new GlideRecord('sn_splitwise_expenses');
+// 		if (expenseGr.get(current.expense_distribution)) {
+// 			var groupGr = new GlideRecord('sn_splitwise_groups');
+// 			if (groupGr.get(expenseGr.group) && groupGr.sys_created_by == currentUserName) {
+// 				answer = true;
+// 				return;
+// 			}
+// 		}
+// 	} else {
+// 		answer = true;
+// 		return;
+// 	}
+
+// 	answer = false;
+// })();
+]]></script>
+        <security_attribute/>
+        <sys_class_name>sys_security_acl</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-04 10:42:37</sys_created_on>
+        <sys_id>3d0916c183161210daf06e7d022bc0bd</sys_id>
+        <sys_mod_count>30</sys_mod_count>
+        <sys_name>sn_splitwise_settlements</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sys_security_acl_3d0916c183161210daf06e7d022bc0bd</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-18 05:55:45</sys_updated_on>
+        <type display_value="record">record</type>
+    </sys_security_acl>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>3d0916c183161210daf06e7d022bc0bd</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-13 00:04:20</sys_created_on>
+        <sys_id>673d9a7383961610daf06e7d022bc0d2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-13 00:04:20</sys_updated_on>
+        <table>sys_security_acl</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

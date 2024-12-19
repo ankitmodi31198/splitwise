@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>expense_distribution</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Settlements - Expense Distribution Chang</name>
+        <order/>
+        <script><![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+    if (isLoading || newValue === oldValue) {
+        return;
+    }
+
+    // Clear the Payer and Payee fields
+    g_form.setValue('payer_group_member', '');
+    g_form.setValue('payee_group_member', '');
+
+    if (newValue) {
+        // Fetch data for autopopulation based on expense_distribution
+        var ga = new GlideAjax('FetchGroupMembersAsPerExpenseDistribution');
+        ga.addParam('sysparm_name', 'getPayerAndPayee');
+        ga.addParam('expenseDistributionSysId', newValue);
+        ga.getXMLAnswer(function(response) {
+            if (response) {
+                var result = JSON.parse(response);
+
+                if (result.success) {
+                    // Autopopulate the fields
+                    if (result.payer_group_member) {
+                        g_form.setValue('payer_group_member', result.payer_group_member, result.payer_name || '');
+                    }
+                    if (result.payee_group_member) {
+                        g_form.setValue('payee_group_member', result.payee_group_member, result.payee_name || '');
+                    }
+					if (result.paid_amount) {
+						g_form.setValue('paid_amount', result.paid_amount);
+					}
+                } else {
+                    g_form.addErrorMessage('Unable to fetch Payer and Payee. Please verify the selected Expense Distribution.');
+                }
+            }
+        });
+    }
+}
+]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-19 05:41:04</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>fcf0aabd832e9610daf06e7d022bc095</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Settlements - Expense Distribution Chang</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sys_script_client_fcf0aabd832e9610daf06e7d022bc095</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-19 05:44:58</sys_updated_on>
+        <table>sn_splitwise_settlements</table>
+        <type>onChange</type>
+        <ui_type>0</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>

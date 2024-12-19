@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_app">
+    <sys_app action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <can_edit_in_studio>true</can_edit_in_studio>
+        <enforce_license>none</enforce_license>
+        <guided_setup_guid/>
+        <hide_on_ui>false</hide_on_ui>
+        <ide_created>DS</ide_created>
+        <installed_as_dependency>false</installed_as_dependency>
+        <js_level>es_latest</js_level>
+        <licensable>true</licensable>
+        <license/>
+        <license_category>none</license_category>
+        <license_definition/>
+        <license_model>none</license_model>
+        <logo>1a1069c183521210daf06e7d022bc049</logo>
+        <menu/>
+        <name>Splitwise</name>
+        <package_json/>
+        <private>false</private>
+        <restrict_table_access>false</restrict_table_access>
+        <runtime_access_tracking>permissive</runtime_access_tracking>
+        <scope>sn_splitwise</scope>
+        <scoped_administration>false</scoped_administration>
+        <short_description>Application for splitting expenses with your friends.</short_description>
+        <source>sn_splitwise</source>
+        <store_correlation_id/>
+        <store_url/>
+        <subscription_entitlement/>
+        <sys_class_name>sys_app</sys_class_name>
+        <sys_code/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-04 06:33:53</sys_created_on>
+        <sys_id>de10a10583521210daf06e7d022bc0cd</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-04 06:33:54</sys_updated_on>
+        <template/>
+        <trackable>true</trackable>
+        <uninstall_blocked>false</uninstall_blocked>
+        <user_role/>
+        <vendor/>
+        <vendor_prefix/>
+        <version>1.0.0</version>
+    </sys_app>
+    <sys_translated_text action="delete_multiple" query="documentkey=de10a10583521210daf06e7d022bc0cd"/>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color/>
+        <chunk_size_bytes>700000</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/svg+xml</content_type>
+        <file_name>Splitwise_idUjRvcMIo_0.svg</file_name>
+        <hash>044ef17faf95cafb8fa0cc98bf3ade278a0680126f268bd5cc9f071631a798f2</hash>
+        <image_height/>
+        <image_width/>
+        <size_bytes>5330</size_bytes>
+        <size_compressed>2440</size_compressed>
+        <state>available_conditionally</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-04 06:33:54</sys_created_on>
+        <sys_id>1a1069c183521210daf06e7d022bc049</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-04 06:56:10</sys_updated_on>
+        <table_name>sys_app</table_name>
+        <table_sys_id>de10a10583521210daf06e7d022bc0cd</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAA/w==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="Splitwise_idUjRvcMIo_0.svg" sys_id="1a1069c183521210daf06e7d022bc049">1a1069c183521210daf06e7d022bc049</sys_attachment>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-04 06:33:54</sys_created_on>
+        <sys_id>5a1069c183521210daf06e7d022bc049</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>rVhNj1y3EbznVxCT83tLNr8NrYFYiU72VffBaLMjZCQZljIS9OtTVc3ZFeRAyCEwzO03fI9sdldVN/Xi4/UxfHl3ef/x/nD+9On3n+7uPn/+vH/O+4c/Hu8sxniHNw7h89s3n873B8vzEM4Pbx/Pn+4PHfb17cPnXz58uT/EEANmA3/Uej99ubx9/6//tmqac95p9vDzX8KLx/DPt5fL/eH9h/cPB9nbH/++PNwfHq4P7z+8ecOXwovfj5/O68W/ppcvbb46hDf3h9+s76OGgjGXy9hHHFvdY6+/wp20t3K1iBf6S9t76aGkPVpou8URStythhT31N0+jb1lHCOVPc6Q91Z7SH1vfYS+11F/S1iwt9DbPks74YVueL3tpWxYd7iV91FKiJvtwzKeak0YZyxbx2d1K/scFb9Y3+Bzw6/R6saVMdIZztV+rXuu82Q4AtzbrVU4EUvCJt3glz7wBw/QHSP0p1BVq7OuUPW8Z5y1wcM+r1ux3cqvueGcCAbi077+aKW/vfxH+Xv7ZqXmAV4r7JWx0C+XtSYeUpo/XDT3/Ete7n3jSZ2XjbmcQbncJgJrsEs5Ia4lZcRrpoJMl8Ho2qx432Zbdt4LEonphHTBi7JMzHIiYI2cMeYx8FudXLvNhjjXbEcECLaPUf/ZngZO2POp7zYyluzwB9iIuQS+V24PCU/4w0/izJv8Lth7wmMlLw47l4IM5NeeiMvmB98YLvthtF69WqFKBFdA0LP1P7mbEKI0N7mLSOQIoE1GoCEymFqWziqcpugnEioRH8Vq2dgoVSxa96Fz55GCIs1YznZRZpiHkrhZHYNgt4GUxTI38WZzEq0H+snk9L1YAeimoz4Qjf11Q2hIrVRATbxPsk7myxZTSQ4mKk+6g2gG0YopwrJuk2JNOegtbxxJZ9ByI0OXWUB28hSOwl3s0Gxzgm9i1XUgHeVsA5+UE5zuBJ1CVeLkMeYylVStNDsG8pgZyJtjYnNMfJ/Yx+84wB9XupnimaAOPdSJcyG0cKwSTvR0DniKrFFr5qD2jG4XZLC50NDZvcfCmMBFY9AQa5jA+JHYga3R0c2MIEPlhON0x25t226J5LBWNuzNBSv2h0uIOqYxpvlkd0keEAUfTYDrGJqRqBnhBfbxda6GGRiNUdmxxwBGsHribjxUzYmc6Rt1b8OeXKBzwRIJHR4aiETyFF981Y4NXICqabzhfzBX1U5YAsDbx6STqXHdOJdJtNJreBiTfAMIxjoSJnNb++OZ/GiKNGAHNwaZVJMRAYknVax4xmkULXMDszYU0GFklbRg4kNRqbU9A9eMNnJtVKJB1Bdkk+FhYnKj4sUmp3vmwemGQIoi5iY+qU7lashYFpGTMADXZsGKPEYRYcbNHLV93GlQtnYepad02iEqnXSKxpLJ0zbKG0JP33oEhSJdQyqQiaQT8WNPxWxibDNPBU+OuWknJgI45RqpkdGxLZMlkq9jiUGMDNK9yM1OslaeoqfyDDZFaczixwzKBIMAVxOZiexKg5CHVGXhI4CDdWEQoaoHqL3g+dd3NhkKRHbg8IbMDZ3XMqUj2jIz0yK0FPIgEWVNCXiaxZf+tTOSU6pICfh2m0dUnnJmCTJNaodJMiDi/rWpOiEDy16bExuViGNcsXn4ZhZfL8exta8Yvln9I/ckt4SzJ49w+p2H4EJ27MRb8NHTlzE7PdknNVBAi+CSiNsxmpuFCiH/escmUDR8k8X+NVu1+Ag+Ok2fF68UuAwvOpJCve7BBQ46/2RTUz2J0xpxnZlFMTEOqHXMdmZ3Ne01W5uRziov10SRPPGEzFYRgbUcJBGFKw43SThqITCGTUf4Zuuv71C6MkDHmfk6V2h8OWurKwgH8Vsbf303oW3IlHtg6x3UAeD06R1WsA1taQFjgN1JwHP0qCwIoEk8QVH7mMiTUPc0gcpNdYXYMh1GRVT15LcfE+mqGomf8mQETni/kSMLIKkuY0LBY6D2gBODcKoL/qRnYQtR96ruNhObifrJRWnh6y4+NL5pzcOIz4GpKCGF0A20IAg5wiYhnYBtZrOLNp2LHHE4MMzHm3bDd9SsJN0rnvBG6FbQARmtqhNtCFvSMnXP3L4OtwrJcWWHURF1I/yu6svPtJvsOFZyaE/YNvpV72xud7QY6YTwdGuAWZM+IYyVst6okmxCIC/R1EGyW6m0mDPnqoqomMzKgMaYWitJAwpypF8bMTXyhXKO/vAZKeNCL6kieG9uJejvmmkqsuvlQp2/FGZM14JC7BpS4Q88mmXOz/48D81+ngcQKQQZtPc1/7/wHT/Gb77hF38dVAxwqzcQi8VHNmhBgyvTM4RP/zOE8w3C5XsE5+8QjGBPVkG0nCVLnFrbbj0CG7Hu1af5wuPiNFAFP9FfgN7UcOFiOqmVfaioHBn0HHy8tV88VsFVL6WsZ1RFwj0tU3Bne8VmCWIAkD7FOQJCpLeQxjDzKHkWoR6/VrGDIqcOC5linSqVbTqX67keKYI5+HgjYVaPiboC/jZ+wl4C23nLEduyM0fFEI0FFJz7xgqFLrTQdqEHZP9VxA+1IUWAcRrPphrGAl/UFNB7dq5F1+OuPsUECV4B0JHrvoX2UY0LPkQKdHWIDCjbFnXl0Gx1UM28u2AGa2KJrVn9geo2hWK25CZO0BwNA91DYlUpakOIU0SdYQftBdakugrY1UytAGpjv2krI0y+8KFMccuPuwo2UsEOzbu+gk4mU6X4wpHVTLevkZ+6J3GSb5xwGgaEHJQANVnGUB/BKN56ar2RcHLTUQazV8SOxPugmkvCXE1ZVkNilMlJvAz+P1RzedRxZAvZgo++sAsHsHlT+cS7DtG7CfWrexEP00Ie04qLFO5RdCepMWIb6i/P2hdAvZ/SjRDYFcwGLxLsCJyuanXJEZV88I4zBS0F5IuMGgge2vYzb1zREDJT9JBY8FViIWWhNuAEUFfCk78jRugSddtRvwjkLhmCL2n9UwFBym6aUtHUNm+M0nMkIfBinTojXdkseZ+ti9p0FUBZYivtNr4tXuEQBpQU9qyKW9KShbv16teh5nWTxK3dO0fdhVRU/C7EeEgwaFNmm+sbCpPkSi08q2htx8ErVfDx1uzZ7E4PtEt5du1NiHncee1uuj8kxbXpBskenPU9+H7MbWez57fxlp8XT+pILekuwABWvw1oCxvLhtyLW1LvmNXbo3ZVRbx8Xffk53v03SP/EZHjC/5T5c//AbifrsDSFAAA</data>
+        <length>3240</length>
+        <position>1</position>
+        <sys_attachment display_value="Splitwise_idUjRvcMIo_0.svg" sys_id="1a1069c183521210daf06e7d022bc049">1a1069c183521210daf06e7d022bc049</sys_attachment>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-04 06:33:54</sys_created_on>
+        <sys_id>da1069c183521210daf06e7d022bc049</sys_id>
+    </sys_attachment_doc>
+</record_update>

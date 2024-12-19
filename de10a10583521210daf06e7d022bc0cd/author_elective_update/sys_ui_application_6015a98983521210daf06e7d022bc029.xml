@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_application">
+    <sys_ui_application action="DELETE">
+        <active>true</active>
+        <hint/>
+        <name>Group Details</name>
+        <order/>
+        <roles>sn_splitwise.groups_user</roles>
+        <sys_class_name>sys_ui_application</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-04 06:55:38</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>6015a98983521210daf06e7d022bc029</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Group Details</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sys_ui_application_6015a98983521210daf06e7d022bc029</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-04 06:55:38</sys_updated_on>
+    </sys_ui_application>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</application>
+        <file_path/>
+        <instance_id>add57f3000521210ac1fc988b26642fa</instance_id>
+        <instance_name>glide_db_dump</instance_name>
+        <name>sys_ui_application_6015a98983521210daf06e7d022bc029</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_application"><sys_ui_application action="INSERT_OR_UPDATE"><active>true</active><hint/><name>Group Details</name><order/><roles>sn_splitwise.groups_user</roles><sys_class_name>sys_ui_application</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2024-12-04 06:55:38</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>6015a98983521210daf06e7d022bc029</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Group Details</sys_name><sys_overrides/><sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package><sys_policy/><sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope><sys_update_name>sys_ui_application_6015a98983521210daf06e7d022bc029</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2024-12-04 06:55:38</sys_updated_on></sys_ui_application></record_update>]]></payload>
+        <payload_hash>1548024633</payload_hash>
+        <record_name>Group Details</record_name>
+        <reverted_from/>
+        <source>da10a10583521210daf06e7d022bc0d0</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-04 06:55:38</sys_created_on>
+        <sys_id>a015a98983521210daf06e7d022bc02b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1939073f2720000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-04 06:55:38</sys_updated_on>
+        <type>Application Menu</type>
+        <update_guid>a415a989435212103c91eabb7e37892a</update_guid>
+        <update_guid_history>a415a989435212103c91eabb7e37892a:1548024633</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-04 06:59:34</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_application">sys_ui_application</sys_db_object>
+        <sys_id>8ee789cd2a7e4db985580c2eaff00749</sys_id>
+        <sys_metadata>6015a98983521210daf06e7d022bc029</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Group Details</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_scope_delete display_value="">1bbf902f56684a4e8bdca6050439e3c4</sys_scope_delete>
+        <sys_update_name>sys_ui_application_6015a98983521210daf06e7d022bc029</sys_update_name>
+        <sys_update_version display_value="sys_ui_application_6015a98983521210daf06e7d022bc029">a015a98983521210daf06e7d022bc02b</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-04 06:59:34</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

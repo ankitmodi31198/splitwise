@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function ($scope, $location) {
+    var c = this;
+
+    // Redirect to Add Group Page
+    c.addGroup = function () {
+        $location.url('/add_group');
+    };
+
+};
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.splitwise-my-groups-container {
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  .my-groups-header {
+    background-color: #293e40;
+    padding: 12px 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+
+    h3 {
+      width: calc(100% - 40px);
+      margin: 0;
+      font-size: 1.4rem;
+      letter-spacing: 0.5px;
+    }
+
+    .add-group-btn {
+      background-color: #00796b;
+      color: #ffffff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s ease-in-out;
+      border: none;
+
+      &amp;:hover {
+        background-color: #004d40;
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+
+
+/* Group Item Styling */
+.group-item {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
+  padding: 16px; /* Added padding */
+  transition: all 0.3s ease-in-out;
+  margin-top: 5px;
+
+  &amp;:hover {
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+  }
+
+  .group-item-card {
+    h6 {
+      color: #00796b;
+      margin: 0;
+    }
+
+    p {
+      font-size: 0.85rem;
+      color: #757575;
+    }
+  }
+}
+
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>splitwise_group_list</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Splitwise Group List</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function () {
+	// Function to fetch the sys_id of the logged-in user from sys_user
+	function getUserSysId() {
+		var userSysId = null;
+		var grUser = new GlideRecord('sys_user');
+		grUser.addQuery('email', gs.getUser().getEmail()); // Match by the logged-in user's email
+		grUser.query();
+		if (grUser.next()) {
+			userSysId = grUser.getValue('sys_id');
+		}
+		return userSysId;
+	}
+
+	// Function to fetch all groups the user is part of
+	function getUserGroups(userSysId) {
+		var groups = [];
+		var grGroupMembers = new GlideRecord('sn_splitwise_group_members');
+		grGroupMembers.addQuery('user', userSysId);
+		grGroupMembers.query();
+		while (grGroupMembers.next()) {
+			var group = {};
+			var grGroup = new GlideRecord('sn_splitwise_groups');
+			if (grGroup.get(grGroupMembers.getValue('group'))) {
+
+
+
+
+				// Query the sn_splitwise_group_members table to get the group member records for the current user
+				var groupMemberSysIds = getGroupMemberSysIds(userSysId, grGroup.getValue('sys_id'));
+
+				if (groupMemberSysIds.length > 0) {
+					// Calculate the total owed and owing amounts
+					group.totalYouOwe = calculateTotalOwed(groupMemberSysIds);
+					group.totalOwedToYou = calculateTotalOwing(groupMemberSysIds);
+				} else {
+					group.totalYouOwe = 0;
+					group.totalOwedToYou = 0;
+				}
+
+
+
+
+
+				group.sys_id = grGroup.getValue('sys_id');
+				group.name = grGroup.getValue('name');
+				group.description = grGroup.getValue('description');
+				groups.push(group);
+			}
+		}
+		return groups;
+	}
+
+	// Initialize the data object
+	data.groups = [];
+	data.userSysId = getUserSysId();
+
+	if (data.userSysId) {
+		data.groups = getUserGroups(data.userSysId);
+	}
+
+
+
+
+
+
+
+	// Function to fetch the sys_id of the logged-in user from sys_user
+	function getUserSysId() {
+		var userSysId = null;
+		var grUser = new GlideRecord('sys_user');
+		grUser.addQuery('email', gs.getUser().getEmail());
+		grUser.query();
+		if (grUser.next()) {
+			userSysId = grUser.getValue('sys_id');
+		}
+		return userSysId;
+	}
+
+
+	// Function to fetch all group member sys_ids for the current user
+	function getGroupMemberSysIds(userSysId, groupSysId) {
+		var groupMemberSysIds = [];
+		var grGroupMembers = new GlideRecord('sn_splitwise_group_members');
+		grGroupMembers.addQuery('user', userSysId);
+		grGroupMembers.addQuery('group', groupSysId);
+		grGroupMembers.query();
+		while (grGroupMembers.next()) {
+			groupMemberSysIds.push(grGroupMembers.getValue('sys_id'));
+		}
+		return groupMemberSysIds;
+	}
+
+
+	function isExpenseSettled(grExpenseDistSysId) {
+		var grSettlement = new GlideRecord('sn_splitwise_settlements');
+		grSettlement.addQuery('expense_distribution', grExpenseDistSysId);
+		grSettlement.query();
+		return grSettlement.hasNext();
+	}
+
+
+	// Function to calculate the total owed amount (to the user)
+	function calculateTotalOwed(groupMemberSysIds) {
+		var totalOwed = 0;
+		var grExpenseDist = new GlideRecord('sn_splitwise_expense_distribution');
+		grExpenseDist.addQuery('group_member', 'IN', groupMemberSysIds);
+		grExpenseDist.addQuery('share_amount', '>', 0);
+		grExpenseDist.query();
+		while (grExpenseDist.next()) {
+			if (!isExpenseSettled(grExpenseDist.getValue('sys_id'))) {
+				totalOwed += parseFloat(grExpenseDist.getValue('share_amount') || 0);
+			}
+		}
+		return totalOwed;
+	}
+
+
+	function getPaidByUserExpenseSysIds(groupMemberSysIds) {
+		var paidByUserExpenses = [];
+		var expenses = new GlideRecord('sn_splitwise_expenses');
+		expenses.addQuery('paid_by_user', 'IN', groupMemberSysIds);
+		expenses.query();
+		while(expenses.next()) {
+			paidByUserExpenses.push(expenses.getValue('sys_id'));
+		}
+		return paidByUserExpenses;
+	}
+
+
+	// Function to calculate the total owing amount (from the user)
+	function calculateTotalOwing(groupMemberSysIds) {
+		var totalOwing = 0;
+		var grExpenseDist = new GlideRecord('sn_splitwise_expense_distribution');
+		grExpenseDist.addQuery('expense', 'IN', getPaidByUserExpenseSysIds(groupMemberSysIds));
+		console.log('groupMemberSysIds' + groupMemberSysIds);
+		grExpenseDist.addQuery('group_member', 'NOT IN', groupMemberSysIds);
+		grExpenseDist.addQuery('share_amount', '>', 0);
+		grExpenseDist.query();
+								console.log('grExpenseDist2       ' + JSON.stringify(grExpenseDist));
+		while (grExpenseDist.next()) {
+			if (!isExpenseSettled(grExpenseDist.getValue('sys_id'))) {
+				totalOwing += parseFloat(grExpenseDist.getValue('share_amount') || 0);
+			}
+		}
+		return totalOwing;
+	}
+
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-17 10:36:00</sys_created_on>
+        <sys_id>db241d5583ee5610daf06e7d022bc0a1</sys_id>
+        <sys_mod_count>42</sys_mod_count>
+        <sys_name>Splitwise Group List</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sp_widget_db241d5583ee5610daf06e7d022bc0a1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-18 10:21:38</sys_updated_on>
+        <template><![CDATA[<div class="splitwise-my-groups-container mt-4">
+  <!-- Header Section -->
+  <div class="my-groups-header d-flex justify-content-between align-items-center">
+    <h3 class="mb-0 font-weight-bold text-white">My Groups</h3>
+    <!-- Circular Add Group Button -->
+    <button class="btn add-group-btn">
+      <i class="fa fa-plus"></i>
+    </button>
+  </div>
+
+  <!-- Groups List -->
+  <div class="my-groups-list mt-3">
+    <div class="group-item mb-2 p-3" ng-repeat="group in data.groups">
+      <div class="group-item-card">
+        <h6 class="font-weight-bold mb-1 text-primary">{{ group.name }}</h6>
+        <p class="text-muted mb-0 small">
+          {{ group.description }}
+        </p>
+      </div>
+      <div class="group-item-totals mt-3 d-flex justify-content-between">
+      <div class="total-owed">
+        <p class="text-muted small mb-0">Total Owed to You</p>
+        <h6 class="font-weight-bold text-success mb-0">{{ group.totalOwedToYou | currency: '&#8377;' }}</h6>
+      </div>
+      <div class="total-you-owe">
+        <p class="text-muted small mb-0">Total You Owe</p>
+        <h6 class="font-weight-bold text-danger mb-0">{{ group.totalYouOwe | currency: '&#8377;' }}</h6>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>db241d5583ee5610daf06e7d022bc0a1</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-17 10:36:00</sys_created_on>
+        <sys_id>63241d5583ee5610daf06e7d022bc0a5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-17 10:36:00</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

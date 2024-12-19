@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="DELETE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-04 08:38:45</sys_created_on>
+        <sys_id>dfacbd8583921210daf06e7d022bc0e8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>sn_splitwise_groups.sn_splitwise.groups_user</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_security_acl display_value="sn_splitwise_groups">c7acbd8583921210daf06e7d022bc0e5</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_dfacbd8583921210daf06e7d022bc0e8</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-04 08:38:45</sys_updated_on>
+        <sys_user_role display_value="sn_splitwise.groups_user" name="sn_splitwise.groups_user">8bacbd8583921210daf06e7d022bc0b3</sys_user_role>
+    </sys_security_acl_role>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</application>
+        <file_path/>
+        <instance_id>add57f3000521210ac1fc988b26642fa</instance_id>
+        <instance_name>glide_db_dump</instance_name>
+        <name>sys_security_acl_role_dfacbd8583921210daf06e7d022bc0e8</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role"><sys_security_acl_role action="INSERT_OR_UPDATE"><sys_class_name>sys_security_acl_role</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2024-12-04 08:38:45</sys_created_on><sys_id>dfacbd8583921210daf06e7d022bc0e8</sys_id><sys_mod_count>0</sys_mod_count><sys_name>sn_splitwise_groups.sn_splitwise.groups_user</sys_name><sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package><sys_policy/><sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope><sys_security_acl display_value="sn_splitwise_groups">c7acbd8583921210daf06e7d022bc0e5</sys_security_acl><sys_update_name>sys_security_acl_role_dfacbd8583921210daf06e7d022bc0e8</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2024-12-04 08:38:45</sys_updated_on><sys_user_role display_value="sn_splitwise.groups_user" name="sn_splitwise.groups_user">8bacbd8583921210daf06e7d022bc0b3</sys_user_role></sys_security_acl_role></record_update>]]></payload>
+        <payload_hash>900583548</payload_hash>
+        <record_name>sn_splitwise_groups.sn_splitwise.groups_user</record_name>
+        <reverted_from/>
+        <source>da10a10583521210daf06e7d022bc0d0</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-04 08:38:45</sys_created_on>
+        <sys_id>93acbd8583921210daf06e7d022bc0ec</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19390d25b0a0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-04 08:38:45</sys_updated_on>
+        <type>Access Roles</type>
+        <update_guid>97acbd857992121045c8ddd05ae846eb</update_guid>
+        <update_guid_history>97acbd857992121045c8ddd05ae846eb:900583548</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="sn_splitwise_groups.sn_splitwise.groups_user">ed0c5aaf839ed210daf06e7d022bc0f9</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-12 05:20:31</sys_created_on>
+        <sys_db_object display_value="" name="sys_security_acl_role">sys_security_acl_role</sys_db_object>
+        <sys_id>0925b39d1bad4ff380724078196129a9</sys_id>
+        <sys_metadata>dfacbd8583921210daf06e7d022bc0e8</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>sn_splitwise_groups.sn_splitwise.groups_user</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_scope_delete display_value="">1bbf902f56684a4e8bdca6050439e3c4</sys_scope_delete>
+        <sys_update_name>sys_security_acl_role_dfacbd8583921210daf06e7d022bc0e8</sys_update_name>
+        <sys_update_version display_value="sys_security_acl_role_dfacbd8583921210daf06e7d022bc0e8">93acbd8583921210daf06e7d022bc0ec</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-12 05:20:31</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

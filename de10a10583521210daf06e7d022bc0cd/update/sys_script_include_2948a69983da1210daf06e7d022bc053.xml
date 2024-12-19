@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>sn_splitwise.GroupMembersUserReferenceQualifier</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Reference Qualifier Script to filter out existing users of the group.</description>
+        <mobile_callable>false</mobile_callable>
+        <name>GroupMembersUserReferenceQualifier</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var GroupMembersUserReferenceQualifier = Class.create();
+GroupMembersUserReferenceQualifier.prototype = {
+    initialize: function() {
+    },
+
+	getRefQualForUser: function(current) {
+		// Get the Group selected in the form
+		var groupId = current.group; 
+		if (!groupId) {
+			return ''; // If no group is selected, show all users
+		}
+
+		// Fetch all users already in the group
+		var groupMembers = [];
+		var gmGR = new GlideRecord('sn_splitwise_group_members');
+		gmGR.addQuery('group', groupId);
+		gmGR.query();
+
+		while (gmGR.next()) {
+			groupMembers.push(gmGR.user.toString());
+		}
+
+		if(groupMembers.length > 0) {
+			// Return filter to exclude these users
+			return 'sys_idNOT IN' + groupMembers.join(',');
+		} else {
+			return '';
+		}
+	},
+
+    type: 'GroupMembersUserReferenceQualifier'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-05 06:53:37</sys_created_on>
+        <sys_id>2948a69983da1210daf06e7d022bc053</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>GroupMembersUserReferenceQualifier</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sys_script_include_2948a69983da1210daf06e7d022bc053</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-19 04:17:44</sys_updated_on>
+    </sys_script_include>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>2948a69983da1210daf06e7d022bc053</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-05 06:53:37</sys_created_on>
+        <sys_id>bc3ee6dd83da1210daf06e7d022bc086</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-05 06:53:37</sys_updated_on>
+        <table>sys_script_include</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

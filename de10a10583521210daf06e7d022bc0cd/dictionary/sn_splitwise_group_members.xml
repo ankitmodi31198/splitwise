@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="bbde7d4983921210daf06e7d022bc0f0" label="Group Members" max_length="40" name="sn_splitwise_group_members" type="collection">
+        <element display="true" label="User" mandatory="true" max_length="32" name="user" reference="sys_user" reference_qual="javascript:new GroupMembersUserReferenceQualifier().getRefQualForUser(current);" type="reference" use_reference_qualifier="advanced"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
+        <element label="Group" mandatory="true" max_length="32" name="group" reference="sn_splitwise_groups" type="reference"/>
+        <index name="index">
+            <element name="group"/>
+        </index>
+        <index name="index2">
+            <element name="user"/>
+        </index>
+    </element>
+</database>

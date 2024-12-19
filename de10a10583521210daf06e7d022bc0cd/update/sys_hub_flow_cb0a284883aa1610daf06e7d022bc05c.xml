@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <annotation/>
+        <attributes>browserActivatedIn=chrome,integrationActivatedIn=standalone,labelCacheCleanUpExecuted=true,timeFromCreateToActivate=128000,viewActivatedIn=naturalLanguage</attributes>
+        <authored_on_release_version>26000</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description/>
+        <display_name_after_preview/>
+        <flow_priority>MEDIUM</flow_priority>
+        <generation_source/>
+        <internal_name>splitwise_notification__new_expense_assigned</internal_name>
+        <label_cache>[{"name":"Created_1.current.group_member","label":"Trigger - Record Created➛Expense Distribution Record➛Group Member","reference":"sn_splitwise_group_members","reference_display":"Group Members","type":"reference","base_type":"reference","parent_table_name":"sn_splitwise_expense_distribution","column_name":"group_member","usedInstances":{"7f9c5036-4fb1-487f-8491-0d54824ce946":["ah_to"]}},{"name":"Created_1.current","label":"Trigger - Record Created➛Expense Distribution Record","reference":"sn_splitwise_expense_distribution","reference_display":"Expense Distribution","type":"reference","base_type":"reference","usedInstances":{"7f9c5036-4fb1-487f-8491-0d54824ce946":["record"]},"attributes":{}}]</label_cache>
+        <master_snapshot>5e8ae48883aa1610daf06e7d022bc0ca</master_snapshot>
+        <master_snapshot_digest/>
+        <name>Splitwise Notification - New Expense Assigned</name>
+        <natlang/>
+        <outputs/>
+        <pre_compiled>false</pre_compiled>
+        <remote_trigger_id>5a8ae48883aa1610daf06e7d022bc0f8</remote_trigger_id>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>published</status>
+        <substatus/>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-13 10:19:31</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>cb0a284883aa1610daf06e7d022bc05c</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Splitwise Notification - New Expense Assigned</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sys_hub_flow_cb0a284883aa1610daf06e7d022bc05c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-13 10:21:39</sys_updated_on>
+        <type>flow</type>
+        <version>2</version>
+    </sys_hub_flow>
+    <sys_translated_text action="delete_multiple" query="documentkey=cb0a284883aa1610daf06e7d022bc05c"/>
+    <sys_variable_value action="delete_multiple" query="document_key=cb0a284883aa1610daf06e7d022bc05c"/>
+    <sys_flow_record_trigger action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <condition table="sn_splitwise_expense_distribution">share_amount&gt;0<item endquery="false" field="share_amount" goto="false" newquery="false" operator="&gt;" or="false" value="0"/>
+        </condition>
+        <name/>
+        <on_delete>false</on_delete>
+        <on_insert>true</on_insert>
+        <on_update>false</on_update>
+        <published_version/>
+        <run_flow_in>background</run_flow_in>
+        <run_on_extended>false</run_on_extended>
+        <run_when_setting>both</run_when_setting>
+        <run_when_user_list/>
+        <run_when_user_setting>any</run_when_user_setting>
+        <sys_class_name>sys_flow_record_trigger</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-13 10:21:39</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>5a8ae48883aa1610daf06e7d022bc0f8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-13 10:21:39</sys_updated_on>
+        <table>sn_splitwise_expense_distribution</table>
+        <trigger_definition/>
+    </sys_flow_record_trigger>
+    <sys_trigger_runner_mapping action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <data>{"run_flow_in":"background","run_when_user_list":[],"run_when_setting":"both","run_when_user_setting":"any","run_on_extended":"false"}</data>
+        <identifier>cb0a284883aa1610daf06e7d022bc05c</identifier>
+        <runner>FDTriggerRunner</runner>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-13 10:21:39</sys_created_on>
+        <sys_id>168ae48883aa1610daf06e7d022bc0f9</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-13 10:21:39</sys_updated_on>
+        <trigger display_value="">5a8ae48883aa1610daf06e7d022bc0f8</trigger>
+    </sys_trigger_runner_mapping>
+    <sys_trigger_runner_mapping action="delete_multiple" query="identifier=cb0a284883aa1610daf06e7d022bc05c^sys_idNOT IN168ae48883aa1610daf06e7d022bc0f9"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=cb0a284883aa1610daf06e7d022bc05c"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=cb0a284883aa1610daf06e7d022bc05c^sys_idNOT IN4b0a284883aa1610daf06e7d022bc05d"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>cb0a284883aa1610daf06e7d022bc05c</id>
+        <name>Splitwise Notification - New Expense Assigned</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-13 10:19:31</sys_created_on>
+        <sys_id>4b0a284883aa1610daf06e7d022bc05d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-13 10:19:31</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=4b0a284883aa1610daf06e7d022bc05d"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=cb0a284883aa1610daf06e7d022bc05c^sys_idNOT IN948aa08883aa1610daf06e7d022bc083,9c8aa48883aa1610daf06e7d022bc0e6"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=document_id,uiTypeLabel=Document ID</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent>table_name</dependent>
+        <dependent_on_field>table_name</dependent_on_field>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">document_id</internal_type>
+        <label>Record</label>
+        <mandatory>true</mandatory>
+        <max_length>200</max_length>
+        <model display_value="Splitwise Notification - New Expense Assigned">cb0a284883aa1610daf06e7d022bc05c</model>
+        <model_id>cb0a284883aa1610daf06e7d022bc05c</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_cb0a284883aa1610daf06e7d022bc05c</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-13 10:21:31</sys_created_on>
+        <sys_id>948aa08883aa1610daf06e7d022bc083</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-13 10:21:31</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>true</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=948aa08883aa1610daf06e7d022bc083"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name,uiTypeLabel=Table Name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>200</max_length>
+        <model display_value="Splitwise Notification - New Expense Assigned">cb0a284883aa1610daf06e7d022bc05c</model>
+        <model_id>cb0a284883aa1610daf06e7d022bc05c</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_cb0a284883aa1610daf06e7d022bc05c</name>
+        <next_element/>
+        <order>101</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-13 10:21:31</sys_created_on>
+        <sys_id>9c8aa48883aa1610daf06e7d022bc0e6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-13 10:21:31</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=9c8aa48883aa1610daf06e7d022bc0e6"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=cb0a284883aa1610daf06e7d022bc05c"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=cb0a284883aa1610daf06e7d022bc05c"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=cb0a284883aa1610daf06e7d022bc05c^sys_idNOT IN948ae48883aa1610daf06e7d022bc007"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="Splitwise Notification - New Expense Assigned">cb0a284883aa1610daf06e7d022bc05c</flow>
+        <name>Created</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-13 10:21:31</sys_created_on>
+        <sys_id>948ae48883aa1610daf06e7d022bc007</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-13 10:21:39</sys_updated_on>
+        <trigger_definition display_value="Created">798916a0c31322002841b63b12d3ae7c</trigger_definition>
+        <trigger_inputs>H4sIAAAAAAAA/9VY227jNhD9FUFPLZACuthxnLfdOIsG2G4Ax9s+7AYCJQ1tojTlSpQSd5F/71A3y7r4Eitb5yWBSIpz5ujMGdLffuicuMD1a31GXA76hc6EhFAQPluvAIelGnYEWaq5JRE+kUG41q9lGMOFTsNgOYPlihOJiynhEQ4GoQ+hfm1e6AnhMTysozsfd8L3023yPfV8Gp8j4UQrzuQTi8CB5xUI/O+zSIbMjSULBK7FR4yy/jN/5TZbpU22V3kLxv0QhH797fFCX5EQA0oF5kdtiilEHvXI2ALDs03bsgzDuhqY7qXtmpZvEzAM3LDOTi0D2ULSJn14liB88EtmGvyFQPx7wdfligXSn3G1JM8R+xd3vzLUOgqI3YNsrnx0clqyYW8RMA/uVykZ6UiGM5sMeLwUXzL8ilCgJOayIBRHYsU6rBRkBSJHRB8WwdO0CPiJiTS7fJIHHuHlE5HZt4BIEU4ZR+qdjJsoiMMU/fT25n46cf76MLv5/XbqTG8fZtO7m9ntRH9J83L+idWOGcIci5Ol81Kq4BMDrj5grhVcG3khW8kPnmRJIcSXi424bwLhs1wjNYF7xVS0LfAi/V0KN4xOjXuViKXOFyQEhyyDWMjvsWHYYByt2ctLQnwgHZp1aUWz1aRbUMmW/KuJ7VJvPnKIfAeG8T8JOLeo1+p3GfjAJ5vtdJycz1HRTKxiqdh6IkJGjgwc4vtOhUe1FDHtE3SWW1PV++UcxgK3cMov1BR1SmTJ6Gd0SdQQ1mTBVrolztPP+ZbTWGgBfkr8o3lxiGRJrXA5erck85xj+gAcPFmRBf0aVZ/+YFHExLyCugyastKIWYZDeWlFSlns6MTgj31WdJP0pEZmrUcdXdumSakL1DJGqrJNw3apaYyMIaG+bRieVantJphOlLImiTep8eMqPErFyA+QXp3iHLxRrYaDZJRsa7AgQUkkN5KbfqCZPUGzFLSaIdpHOWIpy2x4sq3OXan1fBIgfkLwDf9QY1QLDnBAyoMnNONXuJ9LvL/nIbZhv25Hak+NCW2zQvsl5+/XHp2QBiHsBrC94pw8cEN7IVwi1j24n01NdwwDMND0bPQ7dzgeux6xKB1djsAya+63gdGK7V243h61JW1y7XLAVuEkbXo7wvtOANjwwaMBnu6AuTBb/S+bex9O97QA4SDU0OHKyxqGN+fMh2Ku32pvhE429X1qxdOrsTc0RyNvhPcYrHg6AJeYA2tIxqNL+2pYq/gGlF0wZQszP+V2E62jFEiHG3zNps7rqv6Wso1AStWOju/SAs+x6TskC1LplOqzaKmpBKH2JRC/3W3WaQ+ADTC94vbVrg9BoT6s9rYw3EAuGucFDP0Rx7dCq3NmBytnd6WqiSTZzvXkKxUMroZjardbDB23WcwGTDfMsz9eHFghSWettZ0zDhV80lo3nQeDV0i4JpPqiWHHkaYvUszeSbHejhT75GNUUYud98jXgH1HLSw9V5zSx1RMcAJaNe9JoOGEhkE0RrX8t0XwNXetyQUgpRzPyxhQU9FPde1qF2lCKRX8c4FkJ/BGN8NhLT9AnV+jqkmh3xsw+CMyHNod5+Fx/QbcBmgP3rNvW0dXRdJWZDt713H71vds7V4VyW4r4sC+1GvW7c3ptKxb29O+rE9vPLvu7y0ozrSlPP4HWY2FhGYfAAA=</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>record_create</trigger_type>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=cb0a284883aa1610daf06e7d022bc05c^sys_idNOT IN948ae48883aa1610daf06e7d022bc009"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Send Email">c1806bf4a70323008299b39f087901cb</action_type>
+        <action_type_parent display_value="Send Email">98c181d20b100300d97d8bf637673ab5</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>c1806bf4a70323008299b39f087901cb</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Splitwise Notification - New Expense Assigned">cb0a284883aa1610daf06e7d022bc05c</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-13 10:21:31</sys_created_on>
+        <sys_id>948ae48883aa1610daf06e7d022bc009</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_updated_by>ankit.modi</sys_updated_by>
+        <sys_updated_on>2024-12-13 10:23:09</sys_updated_on>
+        <ui_id>7f9c5036-4fb1-487f-8491-0d54824ce946</ui_id>
+        <values>H4sIAAAAAAAA/+2YbU/bOhiG/4qVs49dCC2Ul31icNCQ2CYNtOloTJGTOI0Pjp3ZDqVD/e/ncezmpWWlhR4d0OFTFduPfT/2ffml3+88mniH3k6yHwyjdAfvBYP+IAj2+wcH0eAgDfb3DoLtOPF6Hsc5gZaSxEKa7xvMSlNwd3csCdYkCbf9uJSScD2dQn1CVcHw5KtrBiVxRlkC9d7h9x89r8ASetREeod3c1WrSmI4IgyaXmI5Ihp9mUmbl6onhflORFzmIC+ks8Jz18GJq0FnJ1ADQUZV0PPIrSY8ISAnxUyRnpdjnmAt5KQugdyTz5w1BRnlGro8UkrEFOZFIZ0RRHJMGRpTnSGMrDDfM/3dKvoLxA36pquUwBzERivlMU1AkdcqDt2UQvVZU52eYI0vtCxjXcp6pgWNibKzmZAUl0wft8tsg8+FpoLbEI0jNosWrMz5JzuJXt1BayVLBWJIYebGJAuDQ+LpRSbGX2ZiTymvZtHNChMxZvVXekGwjLNTSphZal7mEbTteVhrSaNSG5lgCgatmnHCSqoZC1oSRqqlzHFRUD4KCyluaDUgyM/9EYMPP2ViDPGKjriPY5OrD6uH/VMoP6mKv2JJTeIfoRsInvY8NVHHDCvVpA/zH/4sjXo7GV05JjqsDGeCY0kLfQRD3RCX7LTnENs+WObnZKfxbavPBjPFQ1h8qscU5p7cgghVGcJOmFnGBeT+tK3QSbfVehiuILvB0Fjo/jQcggtl5+1Y9MlWOAC31wTQ2tDxdwnQabsvWNyQdvJq5vaDLnO/Ye15MFaTszJkXZj+HWDAJCq0rne5VYM/AqSH8AmGwygaRrt7g8aHB3Ga7EXpEO/Fg8Z3Y9h0ZY7ldVhtui2GthcZcdvJekysoGXGBGzUrEwI+jYTtUyngyQSAnY+Pk8IKN06rWa3JqT/pCPKWhNpgWAx2QQOplqSKWyOLZ1hjahCClbLR5cCUZdVK6KHJqJEeak0NNNQ04Gvc9btPF/unB1c6cm9XnkRYG4ewN3lBwFujI2zUIvlN0R/JEVZhDkxB/90ihbBXC1oPW5XSKE+y8RiPg5Pc5jy0RydF7NCR+ZgOZn2qFoAs3U0Bc8XkpfCgBHOaE4rQ1h6N49FstRTJOjYKI5bWGzgjbTC4DNDHx8vKlnH0DuPO2peHf3iHL299OFNhh0fRZu29Aqjzyz9fs7T0dqm3n019f/E1LvLbRV3jKTK6G8S65axP5Exmj2nj5RJgiTmjvyXKBc9v7zxmleWh3XPcLioVd+XyTpYDF8vL/85FZtHAC+1Utrv7qUimbT8f1UGwSAuqh/ygTAm0Ju79nXch0mVfkql0tXfO9OeDdlyMVe808U3Ai9Hri0XDJ6J5vF4zcXYvjUx4sCQ+5cLZVihiBCOcAsmEwDlwI9GIkWVFnTlvblzUfax4Fdarjx/qRr7AWgIPrIl9V9nRMMDWB268HaT+3ssGVJ6wmxtcuUxqvTbquRtIRQ1C38Iz2cFnnh35XVjGe0MfoiaZGwadsRZs/mwiwxL2HByUXJtYpX5DnH1/VDsUQKso/eT9pgFpkkYTcJqZeeX94H+gOpKP1g4jN07TvDfRW2V7N51OUurZc7wDUGYT9DPkigzgwoJiWIBmEqueiglhKFUEmJ8IYn5K6P6+4Iq9/8FtAYNcYZEqU2VKCVSZVEI8I4mOF/ujssM82sjZK7Z4sb/UiiBzvvDPwY77+6npa5+3tQ8ipnHE7NZXh5Dy8tmZb17zwqHVf0MsEfVwtnlbjyZztncfefD5cfz5raz98RHwHB3dzB8ve88+RVQjJN+IkVRuNw2/BL48Q/6QFtY7B4AAA==</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=cb0a284883aa1610daf06e7d022bc05c"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=cb0a284883aa1610daf06e7d022bc05c"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=cb0a284883aa1610daf06e7d022bc05c"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=cb0a284883aa1610daf06e7d022bc05c"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_cb0a284883aa1610daf06e7d022bc05c</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-13 10:21:31</sys_created_on>
+        <sys_id>508aa48883aa1610daf06e7d022bc0e9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-13 10:21:31</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>Record</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_cb0a284883aa1610daf06e7d022bc05c</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-13 10:21:31</sys_created_on>
+        <sys_id>588aa08883aa1610daf06e7d022bc086</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-13 10:21:31</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_cb0a284883aa1610daf06e7d022bc05c"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_cb0a284883aa1610daf06e7d022bc05c"/>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <annotation/>
+        <attributes>browserActivatedIn=chrome,integrationActivatedIn=standalone,labelCacheCleanUpExecuted=true,viewActivatedIn=naturalLanguage</attributes>
+        <authored_on_release_version>26000</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description/>
+        <flow_priority>MEDIUM</flow_priority>
+        <internal_name>splitwise_notification__new_expense_assigned</internal_name>
+        <label_cache>[{"name":"Created_1.current.group_member","label":"Trigger - Record Created➛Expense Distribution Record➛Group Member","reference":"sn_splitwise_group_members","reference_display":"Group Members","type":"reference","base_type":"reference","parent_table_name":"sn_splitwise_expense_distribution","column_name":"group_member","usedInstances":{"7f9c5036-4fb1-487f-8491-0d54824ce946":["ah_to"]}},{"name":"Created_1.current","label":"Trigger - Record Created➛Expense Distribution Record","reference":"sn_splitwise_expense_distribution","reference_display":"Expense Distribution","type":"reference","base_type":"reference","usedInstances":{"7f9c5036-4fb1-487f-8491-0d54824ce946":["record"]},"attributes":{}}]</label_cache>
+        <master>true</master>
+        <name>Splitwise Notification - New Expense Assigned</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="Splitwise Notification - New Expense Assigned">cb0a284883aa1610daf06e7d022bc05c</parent_flow>
+        <remote_trigger_id/>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-13 10:21:39</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>5e8ae48883aa1610daf06e7d022bc0ca</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-13 10:21:39</sys_updated_on>
+        <type>flow</type>
+        <version>2</version>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=5e8ae48883aa1610daf06e7d022bc0ca"/>
+    <sys_variable_value action="delete_multiple" query="document_key=5e8ae48883aa1610daf06e7d022bc0ca"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=5e8ae48883aa1610daf06e7d022bc0ca"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=5e8ae48883aa1610daf06e7d022bc0ca^sys_idNOT IN5e8ae48883aa1610daf06e7d022bc0cb"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>5e8ae48883aa1610daf06e7d022bc0ca</id>
+        <name>Splitwise Notification - New Expense Assigned</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-13 10:21:39</sys_created_on>
+        <sys_id>5e8ae48883aa1610daf06e7d022bc0cb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-13 10:21:39</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=5e8ae48883aa1610daf06e7d022bc0cb"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=5e8ae48883aa1610daf06e7d022bc0ca^sys_idNOT IN168ae48883aa1610daf06e7d022bc0d7,1e8ae48883aa1610daf06e7d022bc0cc"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name,uiTypeLabel=Table Name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>200</max_length>
+        <model display_value="Splitwise Notification - New Expense Assigned">5e8ae48883aa1610daf06e7d022bc0ca</model>
+        <model_id>5e8ae48883aa1610daf06e7d022bc0ca</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_5e8ae48883aa1610daf06e7d022bc0ca</name>
+        <next_element/>
+        <order>101</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-13 10:21:39</sys_created_on>
+        <sys_id>168ae48883aa1610daf06e7d022bc0d7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-13 10:21:39</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=168ae48883aa1610daf06e7d022bc0d7"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=document_id,uiTypeLabel=Document ID</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent>table_name</dependent>
+        <dependent_on_field>table_name</dependent_on_field>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">document_id</internal_type>
+        <label>Record</label>
+        <mandatory>true</mandatory>
+        <max_length>200</max_length>
+        <model display_value="Splitwise Notification - New Expense Assigned">5e8ae48883aa1610daf06e7d022bc0ca</model>
+        <model_id>5e8ae48883aa1610daf06e7d022bc0ca</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_5e8ae48883aa1610daf06e7d022bc0ca</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-13 10:21:39</sys_created_on>
+        <sys_id>1e8ae48883aa1610daf06e7d022bc0cc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-13 10:21:39</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>true</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=1e8ae48883aa1610daf06e7d022bc0cc"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=5e8ae48883aa1610daf06e7d022bc0ca"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=5e8ae48883aa1610daf06e7d022bc0ca"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=5e8ae48883aa1610daf06e7d022bc0ca^sys_idNOT INda8ae48883aa1610daf06e7d022bc0ef"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="Splitwise Notification - New Expense Assigned">5e8ae48883aa1610daf06e7d022bc0ca</flow>
+        <name>Created</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-13 10:21:39</sys_created_on>
+        <sys_id>da8ae48883aa1610daf06e7d022bc0ef</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-13 10:21:39</sys_updated_on>
+        <trigger_definition display_value="Created">798916a0c31322002841b63b12d3ae7c</trigger_definition>
+        <trigger_inputs>H4sIAAAAAAAA/9VY227jNhD9FUFPLZACuthxnLfdOIsG2G4Ax9s+7AYCJQ1tojTlSpQSd5F/71A3y7r4Eitb5yWBSIpz5ujMGdLffuicuMD1a31GXA76hc6EhFAQPluvAIelGnYEWaq5JRE+kUG41q9lGMOFTsNgOYPlihOJiynhEQ4GoQ+hfm1e6AnhMTysozsfd8L3023yPfV8Gp8j4UQrzuQTi8CB5xUI/O+zSIbMjSULBK7FR4yy/jN/5TZbpU22V3kLxv0QhH797fFCX5EQA0oF5kdtiilEHvXI2ALDs03bsgzDuhqY7qXtmpZvEzAM3LDOTi0D2ULSJn14liB88EtmGvyFQPx7wdfligXSn3G1JM8R+xd3vzLUOgqI3YNsrnx0clqyYW8RMA/uVykZ6UiGM5sMeLwUXzL8ilCgJOayIBRHYsU6rBRkBSJHRB8WwdO0CPiJiTS7fJIHHuHlE5HZt4BIEU4ZR+qdjJsoiMMU/fT25n46cf76MLv5/XbqTG8fZtO7m9ntRH9J83L+idWOGcIci5Ol81Kq4BMDrj5grhVcG3khW8kPnmRJIcSXi424bwLhs1wjNYF7xVS0LfAi/V0KN4xOjXuViKXOFyQEhyyDWMjvsWHYYByt2ctLQnwgHZp1aUWz1aRbUMmW/KuJ7VJvPnKIfAeG8T8JOLeo1+p3GfjAJ5vtdJycz1HRTKxiqdh6IkJGjgwc4vtOhUe1FDHtE3SWW1PV++UcxgK3cMov1BR1SmTJ6Gd0SdQQ1mTBVrolztPP+ZbTWGgBfkr8o3lxiGRJrXA5erck85xj+gAcPFmRBf0aVZ/+YFHExLyCugyastKIWYZDeWlFSlns6MTgj31WdJP0pEZmrUcdXdumSakL1DJGqrJNw3apaYyMIaG+bRieVantJphOlLImiTep8eMqPErFyA+QXp3iHLxRrYaDZJRsa7AgQUkkN5KbfqCZPUGzFLSaIdpHOWIpy2x4sq3OXan1fBIgfkLwDf9QY1QLDnBAyoMnNONXuJ9LvL/nIbZhv25Hak+NCW2zQvsl5+/XHp2QBiHsBrC94pw8cEN7IVwi1j24n01NdwwDMND0bPQ7dzgeux6xKB1djsAya+63gdGK7V243h61JW1y7XLAVuEkbXo7wvtOANjwwaMBnu6AuTBb/S+bex9O97QA4SDU0OHKyxqGN+fMh2Ku32pvhE429X1qxdOrsTc0RyNvhPcYrHg6AJeYA2tIxqNL+2pYq/gGlF0wZQszP+V2E62jFEiHG3zNps7rqv6Wso1AStWOju/SAs+x6TskC1LplOqzaKmpBKH2JRC/3W3WaQ+ADTC94vbVrg9BoT6s9rYw3EAuGucFDP0Rx7dCq3NmBytnd6WqiSTZzvXkKxUMroZjardbDB23WcwGTDfMsz9eHFghSWettZ0zDhV80lo3nQeDV0i4JpPqiWHHkaYvUszeSbHejhT75GNUUYud98jXgH1HLSw9V5zSx1RMcAJaNe9JoOGEhkE0RrX8t0XwNXetyQUgpRzPyxhQU9FPde1qF2lCKRX8c4FkJ/BGN8NhLT9AnV+jqkmh3xsw+CMyHNod5+Fx/QbcBmgP3rNvW0dXRdJWZDt713H71vds7V4VyW4r4sC+1GvW7c3ptKxb29O+rE9vPLvu7y0ozrSlPP4HWY2FhGYfAAA=</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>record_create</trigger_type>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=5e8ae48883aa1610daf06e7d022bc0ca^sys_idNOT IN568ae48883aa1610daf06e7d022bc0ef"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Send Email">c1806bf4a70323008299b39f087901cb</action_type>
+        <action_type_parent display_value="Send Email">98c181d20b100300d97d8bf637673ab5</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>c1806bf4a70323008299b39f087901cb</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Splitwise Notification - New Expense Assigned">5e8ae48883aa1610daf06e7d022bc0ca</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-13 10:21:39</sys_created_on>
+        <sys_id>568ae48883aa1610daf06e7d022bc0ef</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-13 10:21:39</sys_updated_on>
+        <ui_id>7f9c5036-4fb1-487f-8491-0d54824ce946</ui_id>
+        <values>H4sIAAAAAAAA/+2YbU/bOhiG/4qVs49dCC2Ul31icNCQ2CYNtOloTJGTOI0Pjp3ZDqVD/e/ncezmpWWlhR4d0OFTFduPfT/2ffml3+88mniH3k6yHwyjdAfvBYP+IAj2+wcH0eAgDfb3DoLtOPF6Hsc5gZaSxEKa7xvMSlNwd3csCdYkCbf9uJSScD2dQn1CVcHw5KtrBiVxRlkC9d7h9x89r8ASetREeod3c1WrSmI4IgyaXmI5Ihp9mUmbl6onhflORFzmIC+ks8Jz18GJq0FnJ1ADQUZV0PPIrSY8ISAnxUyRnpdjnmAt5KQugdyTz5w1BRnlGro8UkrEFOZFIZ0RRHJMGRpTnSGMrDDfM/3dKvoLxA36pquUwBzERivlMU1AkdcqDt2UQvVZU52eYI0vtCxjXcp6pgWNibKzmZAUl0wft8tsg8+FpoLbEI0jNosWrMz5JzuJXt1BayVLBWJIYebGJAuDQ+LpRSbGX2ZiTymvZtHNChMxZvVXekGwjLNTSphZal7mEbTteVhrSaNSG5lgCgatmnHCSqoZC1oSRqqlzHFRUD4KCyluaDUgyM/9EYMPP2ViDPGKjriPY5OrD6uH/VMoP6mKv2JJTeIfoRsInvY8NVHHDCvVpA/zH/4sjXo7GV05JjqsDGeCY0kLfQRD3RCX7LTnENs+WObnZKfxbavPBjPFQ1h8qscU5p7cgghVGcJOmFnGBeT+tK3QSbfVehiuILvB0Fjo/jQcggtl5+1Y9MlWOAC31wTQ2tDxdwnQabsvWNyQdvJq5vaDLnO/Ye15MFaTszJkXZj+HWDAJCq0rne5VYM/AqSH8AmGwygaRrt7g8aHB3Ga7EXpEO/Fg8Z3Y9h0ZY7ldVhtui2GthcZcdvJekysoGXGBGzUrEwI+jYTtUyngyQSAnY+Pk8IKN06rWa3JqT/pCPKWhNpgWAx2QQOplqSKWyOLZ1hjahCClbLR5cCUZdVK6KHJqJEeak0NNNQ04Gvc9btPF/unB1c6cm9XnkRYG4ewN3lBwFujI2zUIvlN0R/JEVZhDkxB/90ihbBXC1oPW5XSKE+y8RiPg5Pc5jy0RydF7NCR+ZgOZn2qFoAs3U0Bc8XkpfCgBHOaE4rQ1h6N49FstRTJOjYKI5bWGzgjbTC4DNDHx8vKlnH0DuPO2peHf3iHL299OFNhh0fRZu29Aqjzyz9fs7T0dqm3n019f/E1LvLbRV3jKTK6G8S65axP5Exmj2nj5RJgiTmjvyXKBc9v7zxmleWh3XPcLioVd+XyTpYDF8vL/85FZtHAC+1Utrv7qUimbT8f1UGwSAuqh/ygTAm0Ju79nXch0mVfkql0tXfO9OeDdlyMVe808U3Ai9Hri0XDJ6J5vF4zcXYvjUx4sCQ+5cLZVihiBCOcAsmEwDlwI9GIkWVFnTlvblzUfax4Fdarjx/qRr7AWgIPrIl9V9nRMMDWB268HaT+3ssGVJ6wmxtcuUxqvTbquRtIRQ1C38Iz2cFnnh35XVjGe0MfoiaZGwadsRZs/mwiwxL2HByUXJtYpX5DnH1/VDsUQKso/eT9pgFpkkYTcJqZeeX94H+gOpKP1g4jN07TvDfRW2V7N51OUurZc7wDUGYT9DPkigzgwoJiWIBmEqueiglhKFUEmJ8IYn5K6P6+4Iq9/8FtAYNcYZEqU2VKCVSZVEI8I4mOF/ujssM82sjZK7Z4sb/UiiBzvvDPwY77+6npa5+3tQ8ipnHE7NZXh5Dy8tmZb17zwqHVf0MsEfVwtnlbjyZztncfefD5cfz5raz98RHwHB3dzB8ve88+RVQjJN+IkVRuNw2/BL48Q/6QFtY7B4AAA==</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=5e8ae48883aa1610daf06e7d022bc0ca"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=5e8ae48883aa1610daf06e7d022bc0ca"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=5e8ae48883aa1610daf06e7d022bc0ca"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=5e8ae48883aa1610daf06e7d022bc0ca"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_5e8ae48883aa1610daf06e7d022bc0ca</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-13 10:21:39</sys_created_on>
+        <sys_id>1a8ae48883aa1610daf06e7d022bc0db</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-13 10:21:39</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>Record</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_5e8ae48883aa1610daf06e7d022bc0ca</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-13 10:21:39</sys_created_on>
+        <sys_id>da8ae48883aa1610daf06e7d022bc0d4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-13 10:21:39</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_5e8ae48883aa1610daf06e7d022bc0ca"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_5e8ae48883aa1610daf06e7d022bc0ca"/>
+    <sys_hub_flow action="UPDATE">
+        <sys_id>cb0a284883aa1610daf06e7d022bc05c</sys_id>
+        <latest_snapshot>5e8ae48883aa1610daf06e7d022bc0ca</latest_snapshot>
+        <compiler_build>glide-Wed_Dec_04_10_49_47_IST_2024.zip</compiler_build>
+    </sys_hub_flow>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=cb0a284883aa1610daf06e7d022bc05c^sys_idNOT INd68ae48883aa1610daf06e7d022bc0fa"/>
+    <sys_flow_trigger_plan action="INSERT_OR_UPDATE">
+        <binding_strategy>com.snc.process_flow.engine.binding.OncePerRecord</binding_strategy>
+        <plan>{"type":"PlanProxy","persistor":{"@class":".ChunkingPlanPersistor","table":"sys_flow_trigger_plan","id":"d68ae48883aa1610daf06e7d022bc0fa","name":"plan","plan_signature":null}}</plan>
+        <plan_id>cb0a284883aa1610daf06e7d022bc05c</plan_id>
+        <snapshot>1ceaec8883aa1610daf06e7d022bc0ab</snapshot>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-13 10:21:39</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>d68ae48883aa1610daf06e7d022bc0fa</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-13 10:21:39</sys_updated_on>
+        <trigger display_value="">5a8ae48883aa1610daf06e7d022bc0f8</trigger>
+    </sys_flow_trigger_plan>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=cb0a284883aa1610daf06e7d022bc05c"/>
+</record_update>

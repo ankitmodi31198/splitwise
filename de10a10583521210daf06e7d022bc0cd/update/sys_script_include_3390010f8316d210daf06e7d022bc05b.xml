@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>sn_splitwise.SplitwiseGroupAccess</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Function to check weather loggedIn user belongs to the group or not</description>
+        <mobile_callable>false</mobile_callable>
+        <name>SplitwiseGroupAccess</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var SplitwiseGroupAccess = Class.create();
+SplitwiseGroupAccess.prototype = {
+    initialize: function() {
+    },
+	isUserBelongsToGroup: function(groupSysId) {
+		var loggedInUserId = gs.getUserID(); // Get the logged-in user's sys_id
+	
+		if (groupSysId) {
+			var gr = new GlideRecord('sn_splitwise_group_members');
+			gr.addQuery('group', groupSysId); // Match the group
+			gr.addQuery('user', loggedInUserId); // Match the logged-in user
+			gr.setLimit(1); // Limit to one result for efficiency
+			gr.query();
+
+			// return true;
+			if (gr.next()) {
+				return true; // Allow access if the user is part of the group
+			}
+			return false; // Deny access otherwise	
+		} else {
+			return true; // Allow access if the user is trying to create the group
+		}
+	},
+    type: 'SplitwiseGroupAccess'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-10 09:26:58</sys_created_on>
+        <sys_id>3390010f8316d210daf06e7d022bc05b</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>SplitwiseGroupAccess</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sys_script_include_3390010f8316d210daf06e7d022bc05b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-10 11:22:04</sys_updated_on>
+    </sys_script_include>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>3390010f8316d210daf06e7d022bc05b</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-10 09:26:58</sys_created_on>
+        <sys_id>0841850f8316d210daf06e7d022bc09e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-10 09:26:58</sys_updated_on>
+        <table>sys_script_include</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

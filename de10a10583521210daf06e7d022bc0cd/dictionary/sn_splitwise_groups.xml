@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="6e9cb94583921210daf06e7d022bc057" label="Groups" max_length="40" name="sn_splitwise_groups" type="collection">
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" read_only="true" type="string"/>
+        <element display="true" label="Name" mandatory="true" max_length="200" name="name" type="string"/>
+        <element label="Reference ID" mandatory="true" max_length="19" name="reference_id" type="long"/>
+        <element label="Description" max_length="1000" name="description" type="string"/>
+        <index name="index" unique="true">
+            <element name="reference_id"/>
+        </index>
+    </element>
+</database>

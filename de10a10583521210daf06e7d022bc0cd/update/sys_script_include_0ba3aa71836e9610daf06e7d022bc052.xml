@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>sn_splitwise.FetchGroupMembersAsPerExpenseDistribution</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <mobile_callable>false</mobile_callable>
+        <name>FetchGroupMembersAsPerExpenseDistribution</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var FetchGroupMembersAsPerExpenseDistribution = Class.create();
+FetchGroupMembersAsPerExpenseDistribution.prototype = {
+    initialize: function() {},
+
+    getPayerAndPayee: function(expenseDistributionSysId) {
+        if (!expenseDistributionSysId) {
+            return JSON.stringify({ success: false, message: 'Invalid Expense Distribution' });
+        }
+
+        var result = { success: false };
+        var edGR = new GlideRecord('sn_splitwise_expense_distribution');
+        if (edGR.get(expenseDistributionSysId)) {
+            var expense = edGR.expense; // Reference to the Expense
+
+            // Fetch the Payer (paid_by_user from Expense)
+            var expenseGR = new GlideRecord('sn_splitwise_expenses');
+            if (expenseGR.get(expense)) {
+                result.payer_group_member = expenseGR.paid_by_user.toString();
+                result.payer_name = expenseGR.paid_by_user.getDisplayValue();
+            }
+
+            // Fetch the Payee (group_member from Expense Distribution)
+            result.payee_group_member = edGR.group_member.toString();
+            result.payee_name = edGR.group_member.getDisplayValue();
+
+			result.paid_amount = edGR.share_amount;
+
+            result.success = true;
+        }
+
+        return JSON.stringify(result);
+    },
+
+    type: 'FetchGroupMembersAsPerExpenseDistribution'
+};
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-19 05:40:41</sys_created_on>
+        <sys_id>0ba3aa71836e9610daf06e7d022bc052</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>FetchGroupMembersAsPerExpenseDistribution</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sys_script_include_0ba3aa71836e9610daf06e7d022bc052</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-19 05:44:29</sys_updated_on>
+    </sys_script_include>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>0ba3aa71836e9610daf06e7d022bc052</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-19 05:40:41</sys_created_on>
+        <sys_id>c1c3a2fd832e9610daf06e7d022bc075</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-19 05:40:41</sys_updated_on>
+        <table>sys_script_include</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

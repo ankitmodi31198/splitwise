@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+    <sys_security_acl action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <admin_overrides>true</admin_overrides>
+        <advanced>true</advanced>
+        <applies_to/>
+        <condition/>
+        <controlled_by_refs/>
+        <decision_type>allow</decision_type>
+        <description>Any group member can add an expense</description>
+        <local_or_existing>Local</local_or_existing>
+        <name>sn_splitwise_expenses</name>
+        <operation display_value="create">create</operation>
+        <script><![CDATA[gs.info(JSON.stringify(current));
+if (current.group) {
+	var groupMembers = new GlideRecord('sn_splitwise_group_members');
+	groupMembers.addQuery('group', current.group);
+	groupMembers.addQuery('user', gs.getUserID());
+	groupMembers.setLimit(1);
+	groupMembers.query();
+
+	if(groupMembers.next()) {
+		answer = true;
+	} else {
+		answer = false;
+	}
+} else {
+	answer = true;
+}]]></script>
+        <security_attribute/>
+        <sys_class_name>sys_security_acl</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-04 09:42:20</sys_created_on>
+        <sys_id>e63b4a0983d21210daf06e7d022bc09a</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>sn_splitwise_expenses</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sys_security_acl_e63b4a0983d21210daf06e7d022bc09a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-13 06:21:27</sys_updated_on>
+        <type display_value="record">record</type>
+    </sys_security_acl>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>e63b4a0983d21210daf06e7d022bc09a</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-12 05:56:56</sys_created_on>
+        <sys_id>8354626b83ded210daf06e7d022bc043</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-12 05:56:56</sys_updated_on>
+        <table>sys_security_acl</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

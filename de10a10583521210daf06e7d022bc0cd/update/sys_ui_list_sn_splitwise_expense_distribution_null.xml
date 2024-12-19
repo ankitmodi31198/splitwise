@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_list parent="" relationship="" sys_domain="global" table="sn_splitwise_expense_distribution" version="2" view="">
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>number</element>
+            <list_id display_value="sn_splitwise_expense_distribution" element="NULL" name="sn_splitwise_expense_distribution" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">61ce0d7d832a9610daf06e7d022bc05c</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>0</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-12-18 23:29:20</sys_created_on>
+            <sys_id>adce0d7d832a9610daf06e7d022bc05c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-12-18 23:29:20</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>expense</element>
+            <list_id display_value="sn_splitwise_expense_distribution" element="NULL" name="sn_splitwise_expense_distribution" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">61ce0d7d832a9610daf06e7d022bc05c</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>1</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-12-18 23:29:20</sys_created_on>
+            <sys_id>a1ce0d7d832a9610daf06e7d022bc05d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-12-18 23:29:20</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>expense.group</element>
+            <list_id display_value="sn_splitwise_expense_distribution" element="NULL" name="sn_splitwise_expense_distribution" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">61ce0d7d832a9610daf06e7d022bc05c</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>2</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-12-18 23:29:20</sys_created_on>
+            <sys_id>a5ce0d7d832a9610daf06e7d022bc05d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-12-18 23:29:20</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>group_member</element>
+            <list_id display_value="sn_splitwise_expense_distribution" element="NULL" name="sn_splitwise_expense_distribution" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">61ce0d7d832a9610daf06e7d022bc05c</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>3</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-12-18 23:29:20</sys_created_on>
+            <sys_id>a9ce0d7d832a9610daf06e7d022bc05d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-12-18 23:29:20</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>share_amount</element>
+            <list_id display_value="sn_splitwise_expense_distribution" element="NULL" name="sn_splitwise_expense_distribution" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">61ce0d7d832a9610daf06e7d022bc05c</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>4</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-12-18 23:29:20</sys_created_on>
+            <sys_id>adce0d7d832a9610daf06e7d022bc05d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-12-18 23:29:20</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>is_settled</element>
+            <list_id display_value="sn_splitwise_expense_distribution" element="NULL" name="sn_splitwise_expense_distribution" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">61ce0d7d832a9610daf06e7d022bc05c</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>5</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-12-18 23:29:20</sys_created_on>
+            <sys_id>a1ce0d7d832a9610daf06e7d022bc05e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-12-18 23:29:20</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>note</element>
+            <list_id display_value="sn_splitwise_expense_distribution" element="NULL" name="sn_splitwise_expense_distribution" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">61ce0d7d832a9610daf06e7d022bc05c</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>6</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-12-18 23:29:20</sys_created_on>
+            <sys_id>a5ce0d7d832a9610daf06e7d022bc05e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-12-18 23:29:20</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>sys_created_by</element>
+            <list_id display_value="sn_splitwise_expense_distribution" element="NULL" name="sn_splitwise_expense_distribution" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">61ce0d7d832a9610daf06e7d022bc05c</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>7</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-12-18 23:29:20</sys_created_on>
+            <sys_id>a9ce0d7d832a9610daf06e7d022bc05e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-12-18 23:29:20</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>sys_created_on</element>
+            <list_id display_value="sn_splitwise_expense_distribution" element="NULL" name="sn_splitwise_expense_distribution" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">61ce0d7d832a9610daf06e7d022bc05c</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>8</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-12-18 23:29:20</sys_created_on>
+            <sys_id>adce0d7d832a9610daf06e7d022bc05e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-12-18 23:29:20</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element/>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <name>sn_splitwise_expense_distribution</name>
+            <parent/>
+            <position/>
+            <relationship/>
+            <sum>false</sum>
+            <sys_class_name>sys_ui_list</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2024-12-18 23:29:20</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>61ce0d7d832a9610daf06e7d022bc05c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>sn_splitwise_expense_distribution</sys_name>
+            <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+            <sys_update_name>sys_ui_list_sn_splitwise_expense_distribution_null</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2024-12-18 23:29:20</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_list>
+    </sys_ui_list>
+</record_update>

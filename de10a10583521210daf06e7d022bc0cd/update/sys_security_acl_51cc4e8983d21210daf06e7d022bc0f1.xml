@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+    <sys_security_acl action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <admin_overrides>true</admin_overrides>
+        <advanced>true</advanced>
+        <applies_to/>
+        <condition/>
+        <controlled_by_refs/>
+        <decision_type>allow</decision_type>
+        <description>Manual updates/create to the expense distribution are allowed only by the person who created the expense and creator of the group.</description>
+        <local_or_existing>Local</local_or_existing>
+        <name>sn_splitwise_expense_distribution</name>
+        <operation display_value="write">write</operation>
+        <script><![CDATA[var currentUser = gs.getUserName();
+
+var expenseGr = new GlideRecord('sn_splitwise_expenses');
+if (expenseGr.get(current.expense)) {
+	// Check if the current user is the creator of the expense
+	if (expenseGr.sys_created_by == currentUser) {
+		answer = true; // Allow access
+	}
+
+	var groupGr = new GlideRecord('sn_splitwise_groups');
+	if (groupGr.get(expenseGr.group)) {
+		// Check if the current user is the creator of the group
+		if (groupGr.sys_created_by == currentUser) {
+			answer = true; // Allow access
+		}
+	}
+} else {
+	// Deny access if the current user is neither the creator of the expense nor the group
+	answer = false;
+}]]></script>
+        <security_attribute/>
+        <sys_class_name>sys_security_acl</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-04 09:49:04</sys_created_on>
+        <sys_id>51cc4e8983d21210daf06e7d022bc0f1</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>sn_splitwise_expense_distribution</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sys_security_acl_51cc4e8983d21210daf06e7d022bc0f1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-12 23:31:12</sys_updated_on>
+        <type display_value="record">record</type>
+    </sys_security_acl>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>51cc4e8983d21210daf06e7d022bc0f1</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-12 23:30:47</sys_created_on>
+        <sys_id>80955e3b83561610daf06e7d022bc055</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-12 23:30:47</sys_updated_on>
+        <table>sys_security_acl</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

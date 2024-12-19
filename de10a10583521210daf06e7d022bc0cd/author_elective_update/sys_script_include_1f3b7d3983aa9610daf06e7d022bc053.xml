@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="DELETE">
+        <access>package_private</access>
+        <active>false</active>
+        <api_name>sn_splitwise.ExcludeUsersScriptInclude</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <mobile_callable>false</mobile_callable>
+        <name>ExcludeUsersScriptInclude</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var ExcludeUsersScriptInclude = Class.create();
+ExcludeUsersScriptInclude.prototype = {
+    initialize: function() {
+    },
+	getExcludedUsers: function(groupId) {
+        var excludedUsers = [];
+        var gr = new GlideRecord('sn_splitwise_group_members');
+        gr.addQuery('group', groupId);
+        gr.query();
+        while (gr.next()) {
+            excludedUsers.push(gr.user);  // Collect sys_id of users already in the group
+        }
+        return excludedUsers.join(',');  // Return as a comma-separated string
+    },
+    type: 'ExcludeUsersScriptInclude'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-19 02:44:37</sys_created_on>
+        <sys_id>1f3b7d3983aa9610daf06e7d022bc053</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>ExcludeUsersScriptInclude</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sys_script_include_1f3b7d3983aa9610daf06e7d022bc053</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-19 02:53:05</sys_updated_on>
+    </sys_script_include>
+    <sys_es_latest_script action="DELETE">
+        <id>1f3b7d3983aa9610daf06e7d022bc053</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-19 02:44:37</sys_created_on>
+        <sys_id>ca7b7d7983aa9610daf06e7d022bc003</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-19 02:44:37</sys_updated_on>
+        <table>sys_script_include</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</application>
+        <file_path/>
+        <instance_id>add57f3000521210ac1fc988b26642fa</instance_id>
+        <instance_name>glide_db_dump</instance_name>
+        <name>sys_script_include_1f3b7d3983aa9610daf06e7d022bc053</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;&lt;sys_script_include action="INSERT_OR_UPDATE"&gt;&lt;access&gt;package_private&lt;/access&gt;&lt;active&gt;false&lt;/active&gt;&lt;api_name&gt;sn_splitwise.ExcludeUsersScriptInclude&lt;/api_name&gt;&lt;caller_access/&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;description/&gt;&lt;mobile_callable&gt;false&lt;/mobile_callable&gt;&lt;name&gt;ExcludeUsersScriptInclude&lt;/name&gt;&lt;sandbox_callable&gt;false&lt;/sandbox_callable&gt;&lt;script&gt;&lt;![CDATA[var ExcludeUsersScriptInclude = Class.create();
+ExcludeUsersScriptInclude.prototype = {
+    initialize: function() {
+    },
+	getExcludedUsers: function(groupId) {
+        var excludedUsers = [];
+        var gr = new GlideRecord('sn_splitwise_group_members');
+        gr.addQuery('group', groupId);
+        gr.query();
+        while (gr.next()) {
+            excludedUsers.push(gr.user);  // Collect sys_id of users already in the group
+        }
+        return excludedUsers.join(',');  // Return as a comma-separated string
+    },
+    type: 'ExcludeUsersScriptInclude'
+};]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2024-12-19 02:44:37&lt;/sys_created_on&gt;&lt;sys_id&gt;1f3b7d3983aa9610daf06e7d022bc053&lt;/sys_id&gt;&lt;sys_mod_count&gt;1&lt;/sys_mod_count&gt;&lt;sys_name&gt;ExcludeUsersScriptInclude&lt;/sys_name&gt;&lt;sys_package display_value="Splitwise" source="sn_splitwise"&gt;de10a10583521210daf06e7d022bc0cd&lt;/sys_package&gt;&lt;sys_policy&gt;read&lt;/sys_policy&gt;&lt;sys_scope display_value="Splitwise"&gt;de10a10583521210daf06e7d022bc0cd&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_1f3b7d3983aa9610daf06e7d022bc053&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2024-12-19 02:53:05&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;sys_es_latest_script action="INSERT_OR_UPDATE"&gt;&lt;id&gt;1f3b7d3983aa9610daf06e7d022bc053&lt;/id&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2024-12-19 02:44:37&lt;/sys_created_on&gt;&lt;sys_id&gt;ca7b7d7983aa9610daf06e7d022bc003&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2024-12-19 02:44:37&lt;/sys_updated_on&gt;&lt;table&gt;sys_script_include&lt;/table&gt;&lt;use_es_latest&gt;true&lt;/use_es_latest&gt;&lt;/sys_es_latest_script&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>1911400505</payload_hash>
+        <record_name>ExcludeUsersScriptInclude</record_name>
+        <reverted_from/>
+        <source>da10a10583521210daf06e7d022bc0d0</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-19 02:53:05</sys_created_on>
+        <sys_id>ca6dbd3d83aa9610daf06e7d022bc09d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>193dcd547300000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-19 02:53:05</sys_updated_on>
+        <type>Script Include</type>
+        <update_guid>426dbd3d94aa96100cd558f9628f0d9d</update_guid>
+        <update_guid_history>426dbd3d94aa96100cd558f9628f0d9d:1911400505,c67b3db9bfaa96109e8010064cfa3a49:301990570</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-19 02:59:58</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_include">sys_script_include</sys_db_object>
+        <sys_id>0164a2ccc1124a548d3466d49e6a2784</sys_id>
+        <sys_metadata>1f3b7d3983aa9610daf06e7d022bc053</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>ExcludeUsersScriptInclude</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_parent/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_scope_delete display_value="">1bbf902f56684a4e8bdca6050439e3c4</sys_scope_delete>
+        <sys_update_name>sys_script_include_1f3b7d3983aa9610daf06e7d022bc053</sys_update_name>
+        <sys_update_version display_value="sys_script_include_1f3b7d3983aa9610daf06e7d022bc053">ca6dbd3d83aa9610daf06e7d022bc09d</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-19 02:59:58</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

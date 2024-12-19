@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function () {
+    var c = this;
+};
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.splitwise-groups-panel-container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  
+  .card-wrapper {
+    &amp;:nth-child(even) {
+      padding-right: 0;
+    }
+    &amp;:nth-child(odd) {
+      padding-left: 0;
+    }
+
+    .owed-card, .owe-card {
+      border-radius: 12px;
+      background: #f9f9f9;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, .1);
+
+      &amp;:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);  
+      }
+
+      h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+      }
+
+      .card-body {
+        padding: 1.5rem 1.25rem;
+      }
+    }
+
+    .text-success, .text-danger {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    .text-success {
+      color: #5cb85c
+    }
+
+    .text-danger {
+      color: #d9534f;
+    }
+
+  }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>net_balances_widget</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Net Balances Widget</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function () {
+
+	// Function to fetch the sys_id of the logged-in user from sys_user
+	function getUserSysId() {
+		var userSysId = null;
+		var grUser = new GlideRecord('sys_user');
+		grUser.addQuery('email', gs.getUser().getEmail());
+		grUser.query();
+		if (grUser.next()) {
+			userSysId = grUser.getValue('sys_id');
+		}
+		return userSysId;
+	}
+
+
+	// Function to fetch all group member sys_ids for the current user
+	function getGroupMemberSysIds(userSysId) {
+		var groupMemberSysIds = [];
+		var grGroupMembers = new GlideRecord('sn_splitwise_group_members');
+		grGroupMembers.addQuery('user', userSysId);
+		grGroupMembers.query();
+		while (grGroupMembers.next()) {
+			groupMemberSysIds.push(grGroupMembers.getValue('sys_id'));
+		}
+		return groupMemberSysIds;
+	}
+
+
+	function isExpenseSettled(grExpenseDistSysId) {
+		var grSettlement = new GlideRecord('sn_splitwise_settlements');
+		grSettlement.addQuery('expense_distribution', grExpenseDistSysId);
+		grSettlement.query();
+		return grSettlement.hasNext();
+	}
+
+
+	// Function to calculate the total owed amount (to the user)
+	function calculateTotalOwed(groupMemberSysIds) {
+		var totalOwed = 0;
+		var grExpenseDist = new GlideRecord('sn_splitwise_expense_distribution');
+		grExpenseDist.addQuery('group_member', 'IN', groupMemberSysIds);
+		grExpenseDist.addQuery('share_amount', '>', 0);
+		grExpenseDist.query();
+		while (grExpenseDist.next()) {
+			if (!isExpenseSettled(grExpenseDist.getValue('sys_id'))) {
+				totalOwed += parseFloat(grExpenseDist.getValue('share_amount') || 0);
+			}
+		}
+		return totalOwed;
+	}
+	
+	
+	function getPaidByUserExpenseSysIds(groupMemberSysIds) {
+		var paidByUserExpenses = [];
+		var expenses = new GlideRecord('sn_splitwise_expenses');
+		expenses.addQuery('paid_by_user', 'IN', groupMemberSysIds);
+		expenses.query();
+		while(expenses.next()) {
+			paidByUserExpenses.push(expenses.getValue('sys_id'));
+		}
+		return paidByUserExpenses;
+	}
+	
+
+	// Function to calculate the total owing amount (from the user)
+	function calculateTotalOwing(groupMemberSysIds) {
+		var totalOwing = 0;
+		var grExpenseDist = new GlideRecord('sn_splitwise_expense_distribution');
+		grExpenseDist.addQuery('expense', 'IN', getPaidByUserExpenseSysIds(groupMemberSysIds));
+		grExpenseDist.addQuery('group_member', 'NOT IN', groupMemberSysIds);
+		grExpenseDist.addQuery('share_amount', '>', 0);
+		grExpenseDist.query();
+		while (grExpenseDist.next()) {
+			if (!isExpenseSettled(grExpenseDist.getValue('sys_id'))) {
+				totalOwing += parseFloat(grExpenseDist.getValue('share_amount') || 0);
+			}
+		}
+		return totalOwing;
+	}
+
+
+	// Get the sys_id of the current user from the sn_splitwise_users table
+	var userSysId = getUserSysId();
+
+	if (userSysId) {
+		// Query the sn_splitwise_group_members table to get the group member records for the current user
+		var groupMemberSysIds = getGroupMemberSysIds(userSysId);
+
+		if (groupMemberSysIds.length > 0) {
+			// Calculate the total owed and owing amounts
+			data.totalOwed = calculateTotalOwed(groupMemberSysIds);
+			data.totalOwing = calculateTotalOwing(groupMemberSysIds);
+		} else {
+			data.totalOwed = 0;
+			data.totalOwing = 0;
+		}
+	} else {
+		data.totalOwed = 0;
+		data.totalOwing = 0;
+	}
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-16 09:33:17</sys_created_on>
+        <sys_id>cb3cbfb8836a5610daf06e7d022bc0d3</sys_id>
+        <sys_mod_count>107</sys_mod_count>
+        <sys_name>Net Balances Widget</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sp_widget_cb3cbfb8836a5610daf06e7d022bc0d3</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-18 06:56:03</sys_updated_on>
+        <template><![CDATA[<div class="splitwise-groups-panel-container container mt-4">
+  <div class="row">
+    <!-- Total Owed to You -->
+    <div class="col-md-6 mb-3 card-wrapper">
+      <div class="card border-0 shadow-sm rounded-lg owed-card h-100">
+        <div class="card-body text-center">
+          <h5 class="text-success font-weight-bold mb-3">Total Owed to You</h5>
+          <h2 class="text-success font-weight-bold">{{ data.totalOwing | currency: '&#8377;' }}</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- Total You Owe -->
+    <div class="col-md-6 mb-3 card-wrapper">
+      <div class="card border-0 shadow-sm rounded-lg owe-card h-100">
+        <div class="card-body text-center">
+          <h5 class="text-danger font-weight-bold mb-3">Total You Owe</h5>
+          <h2 class="text-danger font-weight-bold">{{ data.totalOwed | currency: '&#8377;' }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>cb3cbfb8836a5610daf06e7d022bc0d3</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-16 09:33:17</sys_created_on>
+        <sys_id>c33cbfb8836a5610daf06e7d022bc0d8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-16 09:33:17</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

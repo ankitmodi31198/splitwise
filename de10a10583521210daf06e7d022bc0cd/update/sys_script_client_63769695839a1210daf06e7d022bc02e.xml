@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description>On change of Group we're clearing the User field as new selected group can be map or not map with the previously selected User</description>
+        <field>group</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Group Members - Group Change Handler</name>
+        <order/>
+        <script><![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+    if (isLoading || newValue === oldValue) {
+        return;
+    }
+
+    if (newValue) {
+        // Use the selected group to filter the User field
+        g_form.getReference('group', function(groupRecord) {
+            if (groupRecord) {
+                var query = 'sys_idNOT IN (SELECT user FROM sn_splitwise_group_members WHERE group=' + groupRecord.sys_id + ')';
+				g_form.setReadOnly('user', false); // Ensure the field is editable
+                g_form.setValue('user', ''); // Clear the User field value
+                g_form.addQuery('user', query); // Add the query for the User field
+            }
+        });
+    } else {
+		g_form.setValue('user', '');
+		g_form.setReadonly('user', true);
+    }
+}
+]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-05 05:11:42</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>63769695839a1210daf06e7d022bc02e</sys_id>
+        <sys_mod_count>15</sys_mod_count>
+        <sys_name>Group Members - Group Change Handler</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sys_script_client_63769695839a1210daf06e7d022bc02e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-19 07:25:32</sys_updated_on>
+        <table>sn_splitwise_group_members</table>
+        <type>onChange</type>
+        <ui_type>0</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="18eac60983d21210daf06e7d022bc055" label="Expenses" max_length="40" name="sn_splitwise_expenses" type="collection">
+        <element label="Amount" mandatory="true" max_length="10" name="amount" type="integer"/>
+        <element display="true" label="Name" mandatory="true" max_length="200" name="name" type="string"/>
+        <element label="Description" max_length="1000" name="description" type="string"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" read_only="true" type="string"/>
+        <element label="Group" mandatory="true" max_length="32" name="group" reference="sn_splitwise_groups" type="reference"/>
+        <element label="Paid by User" mandatory="true" max_length="32" name="paid_by_user" reference="sn_splitwise_group_members" reference_qual="javascript:new FetchGroupMembersAsPerGroup().getGroupMembers(current.group);" type="reference" use_reference_qualifier="advanced"/>
+        <index name="index">
+            <element name="group"/>
+        </index>
+        <index name="index2">
+            <element name="paid_by_user"/>
+        </index>
+    </element>
+</database>

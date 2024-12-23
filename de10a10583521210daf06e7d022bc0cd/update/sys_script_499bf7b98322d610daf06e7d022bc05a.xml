@@ -30,27 +30,25 @@
         <rest_variables/>
         <role_conditions/>
         <script><![CDATA[(function executeRule(current, previous) {
-    if (current.expense) {
+    if (current.expense && current.is_settled == true && previous.is_settled == false) {
         var settlementPayerGroupMember = current.group_member; // Paid by user in the expense
         var expensePayerGroupMember = current.expense.paid_by_user; // Group member from distribution record
 
-        if (settlementPayerGroupMember == expensePayerGroupMember) {
-			var settlement = new GlideRecord('sn_splitwise_settlements');
-			settlement.addQuery('expense_distribution', current.sys_id);
-			if (!settlement.hasNext()) {
-				settlement.initialize();
-				settlement.payer_group_member = settlementPayerGroupMember;
-				settlement.payee_group_member = expensePayerGroupMember;
-				settlement.paid_amount = current.share_amount; // Share amount from distribution
-				settlement.expense_distribution = current.sys_id; // Link to distribution record
-				settlement.note = 'Settlement for Expense - ' + current.expense.name; // Add expense name
-				settlement.insert();
+		var settlement = new GlideRecord('sn_splitwise_settlements');
+		settlement.addQuery('expense_distribution', current.sys_id);
+		if (!settlement.hasNext()) {
+			settlement.initialize();
+			settlement.payer_group_member = settlementPayerGroupMember;
+			settlement.payee_group_member = expensePayerGroupMember;
+			settlement.paid_amount = current.share_amount; // Share amount from distribution
+			settlement.expense_distribution = current.sys_id; // Link to distribution record
+			settlement.note = 'Settlement for Expense - ' + current.expense.name; // Add expense name
+			settlement.insert();
 
-				// current.is_settled = true;
-				// current.update();
+			// current.is_settled = true;
+			// current.update();
 
-				gs.info('Settlement created successfully for distribution: ' + current.sys_id);
-			}
+			gs.info('Settlement created successfully for distribution: ' + current.sys_id);
 		}
     } else {
         gs.error('Expense not found for distribution record: ' + current.sys_id);
@@ -62,7 +60,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>499bf7b98322d610daf06e7d022bc05a</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_name>Settle Expense of Paid by User</sys_name>
         <sys_overrides/>
         <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
@@ -70,7 +68,7 @@
         <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
         <sys_update_name>sys_script_499bf7b98322d610daf06e7d022bc05a</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2024-12-20 07:34:40</sys_updated_on>
+        <sys_updated_on>2024-12-23 05:17:16</sys_updated_on>
         <template/>
         <when>after</when>
     </sys_script>

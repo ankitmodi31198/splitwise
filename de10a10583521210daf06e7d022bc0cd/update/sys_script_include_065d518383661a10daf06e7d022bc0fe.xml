@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>sn_splitwise.ExpenseManager</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <mobile_callable>false</mobile_callable>
+        <name>ExpenseManager</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var ExpenseManager = Class.create();
+ExpenseManager.prototype = {
+    initialize: function() {},
+
+    process: function() {
+        var action = this.getParameter('action');
+
+        try {
+            if (action === 'getExpenses') {
+                return this.getExpenses();
+            } else if (action === 'createExpense') {
+                return this.createExpense();
+            } else {
+                return JSON.stringify({ status: 'error', message: 'Unknown action' });
+            }
+        } catch (e) {
+            gs.error('Error in ExpenseManager: ' + e.message);
+            return JSON.stringify({ status: 'error', message: 'An unexpected error occurred' });
+        }
+    },
+
+    // Fetch all expenses for a specific group
+    getExpenses: function() {
+        var groupId = this.getParameter('groupId');
+        if (!groupId) {
+            return JSON.stringify({ status: 'error', message: 'Group ID is required' });
+        }
+
+        var response = { expenses: [] };
+        var expenseGR = new GlideRecord('sn_splitwise_expenses');
+        expenseGR.addQuery('group', groupId);
+        expenseGR.query();
+
+        while (expenseGR.next()) {
+            response.expenses.push({
+                sys_id: expenseGR.getValue('sys_id'),
+                description: expenseGR.getValue('description'),
+                amount: expenseGR.getValue('amount'),
+                created_on: expenseGR.getValue('sys_created_on'),
+                created_by: expenseGR.getDisplayValue('sys_created_by')
+            });
+        }
+
+        return JSON.stringify(response);
+    },
+
+    // Create a new expense
+    createExpense: function() {
+        var groupId = this.getParameter('groupId');
+        var description = this.getParameter('description');
+        var amount = parseFloat(this.getParameter('amount'));
+
+        if (!groupId || !description || isNaN(amount)) {
+            return JSON.stringify({ status: 'error', message: 'Group ID, description, and amount are required' });
+        }
+
+        try {
+            var expenseGR = new GlideRecord('sn_splitwise_expenses');
+            expenseGR.initialize();
+            expenseGR.setValue('group', groupId);
+            expenseGR.setValue('description', description);
+            expenseGR.setValue('amount', amount);
+            expenseGR.setValue('sys_created_by', gs.getUserID());
+            expenseGR.insert();
+
+            return JSON.stringify({ status: 'success', message: 'Expense created successfully' });
+        } catch (e) {
+            gs.error('Error creating expense: ' + e.message);
+            return JSON.stringify({ status: 'error', message: 'Failed to create expense' });
+        }
+    },
+
+    type: 'ExpenseManager'
+};
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-22 21:45:37</sys_created_on>
+        <sys_id>065d518383661a10daf06e7d022bc0fe</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>ExpenseManager</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sys_script_include_065d518383661a10daf06e7d022bc0fe</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-22 21:45:37</sys_updated_on>
+    </sys_script_include>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>065d518383661a10daf06e7d022bc0fe</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-22 21:45:37</sys_created_on>
+        <sys_id>c56d1dc383661a10daf06e7d022bc04c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-22 21:45:37</sys_updated_on>
+        <table>sys_script_include</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="DELETE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() {
+  /* widget controller */
+  var c = this;
+	
+	data.formData = {
+    name: "",
+    description: ""
+  };
+
+  data.message = "";
+
+  data.submitForm = function () {
+    // Validate form fields
+    if (!data.formData.name) {
+      data.message = "Group name is required!";
+      return;
+    }
+
+    // Call server to create the group
+    data.server.createRecord(data.formData);
+  };
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.create-group-widget {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.create-group-widget h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.create-group-widget .form-control {
+  margin-bottom: 15px;
+}
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>create_a_new_group</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Create a New Group</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function () {
+  data.createRecord = function (formData) {
+    try {
+      var gr = new GlideRecord('sn_splitwise_groups'); // Replace with your table name
+      gr.initialize();
+      gr.name = formData.name;
+      gr.description = formData.description;
+      gr.insert();
+
+      data.message = "Group created successfully!";
+    } catch (error) {
+      gs.error("Error creating group: " + error.message);
+      data.message = "An error occurred while creating the group. Please try again.";
+    }
+  };
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-19 11:40:16</sys_created_on>
+        <sys_id>2016f3f58322d610daf06e7d022bc0e4</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>Create a New Group</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sp_widget_2016f3f58322d610daf06e7d022bc0e4</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-20 05:51:09</sys_updated_on>
+        <template><![CDATA[<div class="create-group-widget">
+  <h2>Create a New Group</h2>
+  <form ng-submit="c.submitForm()" novalidate>
+    <!-- Group Name -->
+    <div class="form-group">
+      <label for="groupName">Group Name</label>
+      <input type="text" id="groupName" class="form-control" ng-model="c.formData.name" placeholder="Enter group name" required />
+    </div>
+
+    <!-- Group Description -->
+    <div class="form-group">
+      <label for="groupDescription">Description</label>
+      <textarea id="groupDescription" class="form-control" ng-model="c.formData.description" placeholder="Enter group description"></textarea>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">Create Group</button>
+  </form>
+  <div ng-if="c.message" class="alert alert-info mt-3">{{ c.message }}</div>
+</div>
+]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="DELETE">
+        <id>2016f3f58322d610daf06e7d022bc0e4</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-19 11:40:16</sys_created_on>
+        <sys_id>2416f3f58322d610daf06e7d022bc0e7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-19 11:40:16</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</application>
+        <file_path/>
+        <instance_id>add57f3000521210ac1fc988b26642fa</instance_id>
+        <instance_name>glide_db_dump</instance_name>
+        <name>sp_widget_2016f3f58322d610daf06e7d022bc0e4</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[api.controller=function() {
+  /* widget controller */
+  var c = this;
+	
+	data.formData = {
+    name: "",
+    description: ""
+  };
+
+  data.message = "";
+
+  data.submitForm = function () {
+    // Validate form fields
+    if (!data.formData.name) {
+      data.message = "Group name is required!";
+      return;
+    }
+
+    // Call server to create the group
+    data.server.createRecord(data.formData);
+  };
+};]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;.create-group-widget {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.create-group-widget h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.create-group-widget .form-control {
+  margin-bottom: 15px;
+}
+&lt;/css&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;true&lt;/has_preview&gt;&lt;id&gt;create_a_new_group&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {  }]]&gt;&lt;/link&gt;&lt;name&gt;Create a New Group&lt;/name&gt;&lt;option_schema/&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function () {
+  data.createRecord = function (formData) {
+    try {
+      var gr = new GlideRecord('sn_splitwise_groups'); // Replace with your table name
+      gr.initialize();
+      gr.name = formData.name;
+      gr.description = formData.description;
+      gr.insert();
+
+      data.message = "Group created successfully!";
+    } catch (error) {
+      gs.error("Error creating group: " + error.message);
+      data.message = "An error occurred while creating the group. Please try again.";
+    }
+  };
+})();
+]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2024-12-19 11:40:16&lt;/sys_created_on&gt;&lt;sys_id&gt;2016f3f58322d610daf06e7d022bc0e4&lt;/sys_id&gt;&lt;sys_mod_count&gt;5&lt;/sys_mod_count&gt;&lt;sys_name&gt;Create a New Group&lt;/sys_name&gt;&lt;sys_package display_value="Splitwise" source="sn_splitwise"&gt;de10a10583521210daf06e7d022bc0cd&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Splitwise"&gt;de10a10583521210daf06e7d022bc0cd&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_2016f3f58322d610daf06e7d022bc0e4&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2024-12-20 05:51:09&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div class="create-group-widget"&gt;
+  &lt;h2&gt;Create a New Group&lt;/h2&gt;
+  &lt;form ng-submit="c.submitForm()" novalidate&gt;
+    &lt;!-- Group Name --&gt;
+    &lt;div class="form-group"&gt;
+      &lt;label for="groupName"&gt;Group Name&lt;/label&gt;
+      &lt;input type="text" id="groupName" class="form-control" ng-model="c.formData.name" placeholder="Enter group name" required /&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Group Description --&gt;
+    &lt;div class="form-group"&gt;
+      &lt;label for="groupDescription"&gt;Description&lt;/label&gt;
+      &lt;textarea id="groupDescription" class="form-control" ng-model="c.formData.description" placeholder="Enter group description"&gt;&lt;/textarea&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Submit Button --&gt;
+    &lt;button type="submit" class="btn btn-primary"&gt;Create Group&lt;/button&gt;
+  &lt;/form&gt;
+  &lt;div ng-if="c.message" class="alert alert-info mt-3"&gt;{{ c.message }}&lt;/div&gt;
+&lt;/div&gt;
+]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;sys_es_latest_script action="INSERT_OR_UPDATE"&gt;&lt;id&gt;2016f3f58322d610daf06e7d022bc0e4&lt;/id&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2024-12-19 11:40:16&lt;/sys_created_on&gt;&lt;sys_id&gt;2416f3f58322d610daf06e7d022bc0e7&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2024-12-19 11:40:16&lt;/sys_updated_on&gt;&lt;table&gt;sp_widget&lt;/table&gt;&lt;use_es_latest&gt;true&lt;/use_es_latest&gt;&lt;/sys_es_latest_script&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-1020002980</payload_hash>
+        <record_name>Create a New Group</record_name>
+        <reverted_from/>
+        <source>06d1d7f583ae9610daf06e7d022bc033</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-20 05:51:09</sys_created_on>
+        <sys_id>44cf63ca83a2d610daf06e7d022bc091</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>193e29eaa9a0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-20 05:51:09</sys_updated_on>
+        <type>Widget</type>
+        <update_guid>0ccf63ca3fa2d6108c930dc8ae3e5d90</update_guid>
+        <update_guid_history>0ccf63ca3fa2d6108c930dc8ae3e5d90:-1020002980,a9bf23ca7ea2d610e6f85518bc75b133:1943004607,bd7873b94822d6105aa5b5cf1a00ff2b:1542162173,0c5877796a22d610971339b449b993e7:452715187,ee287779b322d610ea71c1860823034f:-1658204464,a016f3f5ab22d61044ae26304ba302e6:1598565717</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Create a New Group">f8755fc3832a1a10daf06e7d022bc0ce</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-23 06:30:09</sys_created_on>
+        <sys_db_object display_value="" name="sp_widget">sp_widget</sys_db_object>
+        <sys_id>027dbe2e21124e9881410c687ac02f10</sys_id>
+        <sys_metadata>2016f3f58322d610daf06e7d022bc0e4</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Create a New Group</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_scope_delete display_value="">1bbf902f56684a4e8bdca6050439e3c4</sys_scope_delete>
+        <sys_update_name>sp_widget_2016f3f58322d610daf06e7d022bc0e4</sys_update_name>
+        <sys_update_version display_value="sp_widget_2016f3f58322d610daf06e7d022bc0e4">44cf63ca83a2d610daf06e7d022bc091</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-23 06:30:09</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

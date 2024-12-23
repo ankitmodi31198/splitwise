@@ -66,7 +66,7 @@
         <id>net_balances_widget</id>
         <internal>false</internal>
         <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
-        <name>Net Balances Widget</name>
+        <name>Splitwise Net Balances Widget</name>
         <option_schema/>
         <public>false</public>
         <roles/>
@@ -177,14 +177,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2024-12-16 09:33:17</sys_created_on>
         <sys_id>cb3cbfb8836a5610daf06e7d022bc0d3</sys_id>
-        <sys_mod_count>107</sys_mod_count>
-        <sys_name>Net Balances Widget</sys_name>
+        <sys_mod_count>108</sys_mod_count>
+        <sys_name>Splitwise Net Balances Widget</sys_name>
         <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
         <sys_policy/>
         <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
         <sys_update_name>sp_widget_cb3cbfb8836a5610daf06e7d022bc0d3</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2024-12-18 06:56:03</sys_updated_on>
+        <sys_updated_on>2024-12-23 06:30:26</sys_updated_on>
         <template><![CDATA[<div class="splitwise-groups-panel-container container mt-4">
   <div class="row">
     <!-- Total Owed to You -->

@@ -1,47 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
-        <client_script><![CDATA[function($scope, $http) {
-    $scope.group = {
-        name: '',
-        description: ''
-    };
+        <client_script><![CDATA[function ($rootScope, $scope, $window, $timeout, $sanitize) {
 
-    $scope.createGroup = function() {
-        if (!$scope.group.name) {
-            return;
-        }
+	var c = this;
 
-        $http.post('/api/now/widget/your_widget_id', {
-            action: 'createGroup',
-            name: $scope.group.name,
-            description: $scope.group.description
-        }).then(function(response) {
-            if (response.data.result.groupCreated) {
-                alert(response.data.result.message);
-                $scope.group.name = '';
-                $scope.group.description = '';
-            } else {
-                alert(response.data.result.message);
-            }
-        });
-    };
-}
-]]></client_script>
+	$scope.group = {
+		name: '',
+		description: '',
+		users: []
+	};
+
+	$scope.createGroup = function() {
+		if (!$scope.group.name || $scope.group.users.length === 0) {
+			alert('Group name and at least one user are required.');
+			return;
+		}
+
+		c.data.action = 'createGroup';
+		c.data.groupName = $scope.group.name;
+		c.data.groupDescription = $scope.group.description;
+		c.data.userIds = $scope.group.users;
+		$scope.server.update().then(function(response) {
+			if (response.response.status === 'success') {
+				alert('Group created successfully!');
+				$scope.group = { name: '', description: '', users: [] };
+			} else {
+				alert('Error: ' + response.data.response.message);
+			}
+		}).catch(function(error) {
+			console.error(error);
+			alert(error);
+		});
+	};
+}]]></client_script>
         <controller_as>c</controller_as>
-        <css>$primary-color: #4caf50;
-$secondary-color: #f44336;
-$text-color: #333;
-
-.group-form-container {
-    background-color: #f9f9f9;
+        <css>.group-form-container {
+    max-width: 400px;
+    margin: 0 auto;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 
     h2 {
-        color: $primary-color;
         margin-bottom: 20px;
+        text-align: center;
     }
 
     .form-group {
@@ -49,46 +53,44 @@ $text-color: #333;
 
         label {
             display: block;
+            font-weight: bold;
             margin-bottom: 5px;
-            color: $text-color;
         }
 
-        input,
-        textarea {
+        input, textarea, select {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 3px;
+        }
 
-            &amp;:focus {
-                border-color: $primary-color;
-                outline: none;
-            }
+        textarea {
+            resize: vertical;
+        }
+
+        select {
+            height: auto;
         }
     }
 
     .button-container {
-        text-align: right;
+        display: flex;
+        justify-content: space-between;
 
         button {
-            background-color: $primary-color;
-            color: #fff;
             padding: 10px 20px;
             border: none;
-            border-radius: 4px;
+            border-radius: 3px;
             cursor: pointer;
 
-            &amp;:hover {
-                background-color: darken($primary-color, 10%);
+            &amp;.cancel {
+                background: #ddd;
+                color: #333;
             }
 
-            &amp;.cancel {
-                background-color: $secondary-color;
-                margin-right: 10px;
-
-                &amp;:hover {
-                    background-color: darken($secondary-color, 10%);
-                }
+            &amp;:not(.cancel) {
+                background: #0078d7;
+                color: #fff;
             }
         }
     }
@@ -103,45 +105,98 @@ $text-color: #333;
         <id>create_new_group</id>
         <internal>false</internal>
         <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
-        <name>Create New Group</name>
+        <name>Splitwise Create New Group</name>
         <option_schema/>
         <public>false</public>
         <roles/>
-        <script><![CDATA[(function() {
-    data.groupCreated = false;
+        <script><![CDATA[(function($sp, input, data, options, gs) {
+	data.availableUsers = []; // Initialize the available users array
 
-    if (input && input.action === "createGroup") {
-        var groupGR = new GlideRecord("sn_splitwise_groups");
-        groupGR.initialize();
+	// Fetch users from the sys_user table
+	try {
+		var userGR = new GlideRecord('sys_user');
+		userGR.query();
+		while (userGR.next()) {
+			data.availableUsers.push({
+				sys_id: userGR.getValue('sys_id'),
+				name: userGR.getValue('name')
+			});
+		}
+	} catch (error) {
+		gs.error('Error fetching users: ' + error.message);
+	}
+	
+	// Handle group creation
+	if (input && input.action === 'createGroup') {
+		// Extract parameters from client-side request
+		var groupName = input.groupName;
+		var groupDescription = input.groupDescription || '';
+		var userIds = input.userIds || [];
 
-        groupGR.name = input.name;
-        groupGR.description = input.description;
+		// Validate input
+		if (!groupName || userIds.length === 0) {
+			data.response = {
+				status: 'error',
+				message: 'Group name and at least one user are required.'
+			};
+			return;
+		}
 
-        // Auto-generate a unique Reference ID
-        groupGR.reference_id = gs.generateGUID();
+		try {
+			// Create the group
+			var groupRecord = new GlideRecord('sn_splitwise_groups');
+			groupRecord.initialize();
+			groupRecord.setValue('name', groupName);
+			groupRecord.setValue('description', groupDescription);
+			groupRecord.setValue('sys_created_by', gs.getUser().getID());
+			var groupSysId = groupRecord.insert();
+			
+			// Add users to the group
+			userIds.forEach(function(userId) {
+				var groupMember = new GlideRecord('sn_splitwise_group_members');
+				groupMember.initialize();
+				groupMember.setValue('group', groupSysId);
+				groupMember.setValue('user', userId);
+				groupMember.setValue('sys_created_by', gs.getUser().getID());
+				groupMember.insert();
+			});
 
-        if (groupGR.insert()) {
-            data.groupCreated = true;
-            data.message = "Group created successfully!";
-        } else {
-            data.message = "Failed to create the group. Please try again.";
-        }
-    }
-})();
+			// Return success response
+			data.response = {
+				status: 'success',
+				message: 'Group created successfully!',
+				groupSysId: groupSysId
+			};
+		} catch (error) {
+			// Handle errors gracefully
+			gs.error('Error creating group: ' + error.message);
+			data.response = {
+				status: 'error',
+				message: 'An unexpected error occurred. Please try again later.'
+			};
+		}
+	} else {
+		// Default response if action is not matched
+		data.response = {
+			status: 'error',
+			message: 'Invalid action.'
+		};
+	}
+})($sp, input, data, options, gs);
 ]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2024-12-20 19:00:50</sys_created_on>
         <sys_id>f3742ad6832ad610daf06e7d022bc038</sys_id>
-        <sys_mod_count>5</sys_mod_count>
-        <sys_name>Create New Group</sys_name>
+        <sys_mod_count>112</sys_mod_count>
+        <sys_name>Splitwise Create New Group</sys_name>
         <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
         <sys_policy/>
         <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
         <sys_update_name>sp_widget_f3742ad6832ad610daf06e7d022bc038</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2024-12-21 20:13:02</sys_updated_on>
+        <sys_updated_on>2024-12-23 06:31:40</sys_updated_on>
         <template><![CDATA[<div class="group-form-container">
     <h2>Create Group</h2>
     <div class="form-group">
@@ -153,9 +208,6 @@ $text-color: #333;
             placeholder="Enter group name"
             required
         />
-        <small ng-show="!group.name && formSubmitted" style="color: red;">
-            Group Name is required.
-        </small>
     </div>
     <div class="form-group">
         <label for="group-description">Description</label>
@@ -165,18 +217,20 @@ $text-color: #333;
             placeholder="Enter group description (optional)"
         ></textarea>
     </div>
+    <div class="form-group">
+        <label for="group-users">Add Users <span style="color: red;">*</span></label>
+        <select
+            id="group-users"
+            ng-model="group.users"
+            ng-options="user.sys_id as user.name for user in data.availableUsers"
+            multiple
+        ></select>
+    </div>
     <div class="button-container">
-        <button
-            class="cancel"
-            ng-click="group.name = ''; group.description = ''"
-        >
+        <button class="cancel" ng-click="group = { name: '', description: '', users: [] }">
             Cancel
         </button>
-        <button
-            ng-click="formSubmitted = true; createGroup()"
-        >
-            Create Group
-        </button>
+        <button ng-click="createGroup()">Create Group</button>
     </div>
 </div>
 ]]></template>

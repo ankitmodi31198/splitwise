@@ -6,27 +6,27 @@
         <css/>
         <glyph/>
         <id/>
-        <order>3</order>
+        <order>1</order>
         <roles/>
         <short_description/>
         <size>md</size>
-        <sp_column display_value="1">b6e17b4e83a2d610daf06e7d022bc056</sp_column>
-        <sp_widget display_value="Create a New Group">2016f3f58322d610daf06e7d022bc0e4</sp_widget>
+        <sp_column display_value="1">1c23c47283aad610daf06e7d022bc0b8</sp_column>
+        <sp_widget display_value="Splitwise Create New Group">f3742ad6832ad610daf06e7d022bc038</sp_widget>
         <sys_class_name>sp_instance</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2024-12-20 06:09:28</sys_created_on>
-        <sys_id>28f33bce83a2d610daf06e7d022bc00b</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_created_on>2024-12-21 20:32:55</sys_created_on>
+        <sys_id>1223087283aad610daf06e7d022bc09b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name/>
         <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
         <sys_policy/>
         <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
-        <sys_update_name>sp_instance_28f33bce83a2d610daf06e7d022bc00b</sys_update_name>
+        <sys_update_name>sp_instance_1223087283aad610daf06e7d022bc09b</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2024-12-20 06:10:49</sys_updated_on>
+        <sys_updated_on>2024-12-21 20:32:55</sys_updated_on>
         <title/>
         <url/>
         <widget_parameters/>
     </sp_instance>
-    <sys_translated_text action="delete_multiple" query="documentkey=28f33bce83a2d610daf06e7d022bc00b"/>
+    <sys_translated_text action="delete_multiple" query="documentkey=1223087283aad610daf06e7d022bc09b"/>
 </record_update>

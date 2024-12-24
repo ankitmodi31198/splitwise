@@ -2,126 +2,174 @@
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
         <client_script><![CDATA[function ($scope, spUtil, $window) {
-	var c = this;
+    var c = this;
 
-	// Initialize options
-	c.memberOptions = [];
-	c.selectedGroup = null;
-	c.selectedMember = null;
-	c.expenseName = "";
-	c.expenseDescription = "";
-	c.expenseAmount = null;
+    // Initialize options
+    c.memberOptions = [];
+    c.selectedGroup = null;
+    c.selectedMember = null;
+    c.expenseName = "";
+    c.expenseDescription = "";
+    c.expenseAmount = null;
+    c.remainingShare = 0;
 
-	// Fetch Group Members when a group is selected
-	c.onGroupChange = function() {
-		c.server.get({
-			action: 'getGroupMembers',
-			groupId: c.selectedGroup
-		}).then(function(response) {
-			c.memberOptions = response.data.memberOptions;
-		});
-	};
-	
-	
-	
+    // Fetch Group Members when a group is selected
+    c.onGroupChange = function() {
+        c.server.get({
+            action: 'getGroupMembers',
+            groupId: c.selectedGroup
+        }).then(function(response) {
+            c.memberOptions = response.data.memberOptions.map(member => ({
+                ...member,
+                share: 0 // Initialize share for each member
+            }));
+        });
+    };
 
-	// Submit the expense
-	c.addExpense = function() {
-		if (!c.expenseName || !c.expenseAmount || !c.selectedGroup || !c.selectedMember) {
-			alert("Please fill in all required fields.");
-			return;
-		}
+    // Calculate the remaining amount to be distributed
+    c.calculateRemainingShare = function() {
+        var totalShare = c.memberOptions.reduce((sum, member) => sum + (member.share || 0), 0);
+        c.remainingShare = c.expenseAmount - totalShare;
+    };
 
-		c.server.get({
-			action: 'addExpense',
-			name: c.expenseName,
-			description: c.expenseDescription,
-			amount: c.expenseAmount,
-			group: c.selectedGroup,
-			paidBy: c.selectedMember
-		}).then(function(response) {
-			if (response.data.response.success) {
-				alert("Expense added successfully!");
-				c.expenseName = "";
-				c.expenseDescription = "";
-				c.expenseAmount = null;
-				c.selectedGroup = null;
-				c.selectedMember = null;
-			} else {
-				alert("Error adding expense: " + response.message);
-			}
-		}).catch(function(error) {
-			console.error(error);
-			alert(error);
-		});
-	};
-}]]></client_script>
+    // Submit the expense
+    c.addExpense = function() {
+        if (!c.expenseName || !c.expenseAmount || !c.selectedGroup || !c.selectedMember) {
+            alert("Please fill in all required fields.");
+            return;
+        }
+
+        if (c.remainingShare !== 0) {
+            alert("The expense amount must be fully distributed among members.");
+            return;
+        }
+
+        var distribution = c.memberOptions.map(member => {
+					return {
+            memberId: member.value,
+            share: member.share || 0
+        	}
+				});
+
+        c.server.get({
+            action: 'addExpense',
+            name: c.expenseName,
+            description: c.expenseDescription,
+            amount: c.expenseAmount,
+            group: c.selectedGroup,
+            paidBy: c.selectedMember,
+            distribution: distribution
+        }).then(function(response) {
+            if (response.data.response.success) {
+                alert("Expense added successfully!");
+                c.expenseName = "";
+                c.expenseDescription = "";
+                c.expenseAmount = null;
+                c.selectedGroup = null;
+                c.selectedMember = null;
+                c.memberOptions = [];
+            } else {
+                alert("Error adding expense: " + response.message);
+            }
+        }).catch(function(error) {
+            console.error(error);
+            alert(error);
+        });
+    };
+}
+]]></client_script>
         <controller_as>c</controller_as>
         <css>.add-expense-widget {
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-    h2 {
-        text-align: center;
-        margin-bottom: 20px;
-        color: #333;
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #555;
     }
 
-    .form-group {
-        margin-bottom: 15px;
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      box-sizing: border-box;
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #555;
-        }
-
-        input,
-        select,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-            box-sizing: border-box;
-
-            &amp;:focus {
-                border-color: #007bff;
-                outline: none;
-            }
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        select {
-            height: 38px;
-        }
+      &amp;:focus {
+        border-color: #007bff;
+        outline: none;
+      }
     }
 
-    .btn {
-        display: inline-block;
-        width: 100%;
-        padding: 10px;
-        background-color: #007bff;
-        color: #fff;
-        text-align: center;
-        border: none;
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    select {
+      height: 38px;
+    }
+
+    .distribution-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+
+      span {
+        flex: 1;
+        font-size: 14px;
+        color: #555;
+      }
+
+      input {
+        flex: 2;
+        padding: 8px;
+        border: 1px solid #ddd;
         border-radius: 4px;
-        cursor: pointer;
 
-        &amp;:hover {
-            background-color: #0056b3;
+        &amp;:focus {
+          border-color: #007bff;
+          outline: none;
         }
+      }
     }
+
+  }
+
+  .btn {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &amp;:hover {
+      background-color: #0056b3;
+    }
+  }
 }
 </css>
         <data_table>sp_instance</data_table>
@@ -178,7 +226,7 @@
 
 
 		else if(input.action == 'addExpense') {
-			if(!input.name || !input.amount || !input.group || !input.paidBy) {
+			if(!input.name || !input.amount || !input.group || !input.paidBy || !input.distribution) {
 				data.response = { success: false, message: "Missing required fields." };
 			} else {
 				try {
@@ -189,7 +237,21 @@
 					expenseGR.setValue('amount', input.amount);
 					expenseGR.setValue('group', input.group);
 					expenseGR.setValue('paid_by_user', input.paidBy);
-					expenseGR.insert();
+					var expenseSysId = expenseGR.insert();
+
+					// Insert distribution data
+					input.distribution.forEach(function(distribution) {
+						if(distribution.share) {
+							var distributionGR = new GlideRecord('sn_splitwise_expense_distribution');
+							distributionGR.initialize();
+							distributionGR.setValue('expense', expenseSysId);
+							distributionGR.setValue('group_member', distribution.memberId);
+							distributionGR.setValue('share_amount', distribution.share);
+							distributionGR.setValue('sys_created_by', gs.getUser().getID());
+							distributionGR.insert();
+						}
+					});
+
 					data.response = { success: true };
 				} catch (e) {
 					data.response = { success: false, message: e.getMessage() };
@@ -197,24 +259,24 @@
 			}
 		}
 	}
-//	data.addExpense = function(params) {
-		// if (params && (!params.name || !params.amount || !params.group || !params.paidBy)) {
-		// 	return { success: false, message: "Missing required fields." };
-		// }
+	//	data.addExpense = function(params) {
+	// if (params && (!params.name || !params.amount || !params.group || !params.paidBy)) {
+	// 	return { success: false, message: "Missing required fields." };
+	// }
 
-		// try {
-			// var expenseGR = new GlideRecord('sn_splitwise_expenses');
-			// expenseGR.initialize();
-			// expenseGR.setValue('name', params.name);
-			// expenseGR.setValue('description', params.description || "");
-			// expenseGR.setValue('amount', params.amount);
-			// expenseGR.setValue('group', params.group);
-			// expenseGR.setValue('paid_by_user', params.paidBy);
-			// expenseGR.insert();
-			// return { success: true };
-		// } catch (e) {
-			// return { success: false, message: e.getMessage() };
-		// }
+	// try {
+	// var expenseGR = new GlideRecord('sn_splitwise_expenses');
+	// expenseGR.initialize();
+	// expenseGR.setValue('name', params.name);
+	// expenseGR.setValue('description', params.description || "");
+	// expenseGR.setValue('amount', params.amount);
+	// expenseGR.setValue('group', params.group);
+	// expenseGR.setValue('paid_by_user', params.paidBy);
+	// expenseGR.insert();
+	// return { success: true };
+	// } catch (e) {
+	// return { success: false, message: e.getMessage() };
+	// }
 	// };
 
 	if (request ) {
@@ -234,55 +296,74 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2024-12-23 07:39:54</sys_created_on>
         <sys_id>ae65234f832a1a10daf06e7d022bc0fe</sys_id>
-        <sys_mod_count>39</sys_mod_count>
+        <sys_mod_count>49</sys_mod_count>
         <sys_name>Splitwise Add New Expense</sys_name>
         <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
         <sys_policy/>
         <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
         <sys_update_name>sp_widget_ae65234f832a1a10daf06e7d022bc0fe</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2024-12-23 21:18:06</sys_updated_on>
+        <sys_updated_on>2024-12-24 02:16:08</sys_updated_on>
         <template><![CDATA[<div class="add-expense-widget">
-    <h2>Add Expense</h2>
+  <h2>Add Expense</h2>
 
-    <div class="form-group">
-        <label for="expenseName">Expense Name <span style="color: red;">*</span></label>
-        <input type="text" id="expenseName" ng-model="c.expenseName" required placeholder="Enter expense name" />
-    </div>
+  <div class="form-group">
+    <label for="expenseName">Expense Name <span style="color: red;">*</span></label>
+    <input type="text" id="expenseName" ng-model="c.expenseName" required placeholder="Enter expense name" />
+  </div>
 
-    <div class="form-group">
-        <label for="expenseDescription">Description</label>
-        <textarea id="expenseDescription" ng-model="c.expenseDescription" placeholder="Enter description (optional)"></textarea>
-    </div>
+  <div class="form-group">
+    <label for="expenseDescription">Description</label>
+    <textarea id="expenseDescription" ng-model="c.expenseDescription" placeholder="Enter description (optional)"></textarea>
+  </div>
 
-    <div class="form-group">
-        <label for="expenseAmount">Amount <span style="color: red;">*</span></label>
-        <input type="number" id="expenseAmount" ng-model="c.expenseAmount" placeholder="Enter amount" />
-    </div>
+  <div class="form-group">
+    <label for="expenseAmount">Amount <span style="color: red;">*</span></label>
+    <input type="number" id="expenseAmount" ng-model="c.expenseAmount" placeholder="Enter amount" />
+  </div>
 
-    <div class="form-group">
-        <label for="group">Group <span style="color: red;">*</span></label>
-        <select id="group" ng-model="c.selectedGroup" ng-change="c.onGroupChange()">
-            <option value="" disabled selected>Select a group</option>
-            <option ng-repeat="group in data.groupOptions" value="{{group.value}}">
-                {{group.label}}
-            </option>
-        </select>
-    </div>
+  <div class="form-group">
+    <label for="group">Group <span style="color: red;">*</span></label>
+    <select id="group" ng-model="c.selectedGroup" ng-change="c.onGroupChange()">
+      <option value="" disabled selected>Select a group</option>
+      <option ng-repeat="group in data.groupOptions" value="{{group.value}}">
+        {{group.label}}
+      </option>
+    </select>
+  </div>
 
-    <div class="form-group">
-        <label for="paidBy">Paid By <span style="color: red;">*</span></label>
-        <select id="paidBy" ng-model="c.selectedMember">
-            <option value="" disabled selected>Select a member</option>
-            <option ng-repeat="member in c.memberOptions" value="{{member.value}}">
-                {{member.label}}
-            </option>
-        </select>
-    </div>
+  <div class="form-group">
+    <label for="paidBy">Paid By <span style="color: red;">*</span></label>
+    <select id="paidBy" ng-model="c.selectedMember">
+      <option value="" disabled selected>Select a member</option>
+      <option ng-repeat="member in c.memberOptions" value="{{member.value}}">
+        {{member.label}}
+      </option>
+    </select>
+  </div>
 
-    <div class="form-group">
-        <button class="btn btn-primary" ng-click="c.addExpense()">Add Expense</button>
+  <div class="form-group">
+    <label>Distribute Expense</label>
+    <div ng-repeat="member in c.memberOptions">
+      <div class="distribution-row">
+        <span>{{member.label}}</span>
+        <input
+               type="number"
+               ng-model="member.share"
+               ng-blur="c.calculateRemainingShare()"
+               placeholder="Enter share"
+               />
+      </div>
     </div>
+  </div>
+  <div class="form-group">
+    <p>Remaining Amount to Distribute: {{c.remainingShare}}</p>
+  </div>
+
+
+  <div class="form-group">
+    <button class="btn btn-primary" ng-click="c.addExpense()">Add Expense</button>
+  </div>
 </div>
 ]]></template>
     </sp_widget>

@@ -5,123 +5,95 @@
     var c = this;
 
     // Initialize data
-    $scope.data = {
-        groupId: '',  // Set this dynamically or hard-code a group ID for testing
-        expenses: [],
-        newExpense: {
-            description: '',
-            amount: ''
-        }
-    };
+    c.expenses = [];
+    c.filteredExpenses = [];
+    c.searchQuery = '';
+    c.sortKey = 'name';
+    c.reverse = false;
 
-    // Fetch all expenses for the group
-    $scope.fetchExpenses = function() {
-        var ga = new GlideAjax('ExpenseManager');
-        ga.addParam('action', 'getExpenses');
-        ga.addParam('groupId', $scope.data.groupId);
-        ga.getXMLAnswer(function(response) {
-            try {
-                var result = JSON.parse(response.responseXML.documentElement.getAttribute('answer'));
-                if (result.expenses) {
-                    $scope.data.expenses = result.expenses;
-                    $scope.$apply();
-                } else {
-                    alert(result.message || 'Failed to fetch expenses');
-                }
-            } catch (e) {
-                console.error('Error fetching expenses:', e);
-                alert('An error occurred while fetching expenses');
-            }
-        });
-    };
+    // Fetch expenses from the server
+    c.server.get({
+        action: 'getGroupExpenses'
+    }).then(function (response) {
+        c.expenses = response.data.expenses;
+        c.filteredExpenses = [...c.expenses];
+    });
 
-    // Create a new expense
-    $scope.createExpense = function() {
-        if (!$scope.data.newExpense.description || !$scope.data.newExpense.amount) {
-            alert('Description and amount are required');
-            return;
+    // Sort the expenses
+    c.sort = function (key) {
+        if (c.sortKey === key) {
+            c.reverse = !c.reverse;
+        } else {
+            c.sortKey = key;
+            c.reverse = false;
         }
 
-        var ga = new GlideAjax('ExpenseManager');
-        ga.addParam('action', 'createExpense');
-        ga.addParam('groupId', $scope.data.groupId);
-        ga.addParam('description', $scope.data.newExpense.description);
-        ga.addParam('amount', $scope.data.newExpense.amount);
-        ga.getXMLAnswer(function(response) {
-            try {
-                var result = JSON.parse(response.responseXML.documentElement.getAttribute('answer'));
-                if (result.status === 'success') {
-                    alert(result.message);
-                    $scope.data.newExpense = { description: '', amount: '' };
-                    $scope.fetchExpenses();  // Refresh the expense list
-                } else {
-                    alert(result.message || 'Failed to create expense');
-                }
-            } catch (e) {
-                console.error('Error creating expense:', e);
-                alert('An error occurred while creating the expense');
-            }
+        c.filteredExpenses = c.expenses.sort((a, b) => {
+            if (a[key] < b[key]) return c.reverse ? 1 : -1;
+            if (a[key] > b[key]) return c.reverse ? -1 : 1;
+            return 0;
         });
     };
-
-    // Initial fetch
-    $scope.fetchExpenses();
 }
 ]]></client_script>
         <controller_as>c</controller_as>
-        <css>.demo-form-widget {
-    max-width: 400px;
-    margin: 20px auto;
-    font-family: Arial, sans-serif;
+        <css>.group-expenses-widget {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
     h2 {
         text-align: center;
         margin-bottom: 20px;
-        color: #007bff;
+        color: #333;
     }
 
-    .form-group {
+    .search-bar {
         margin-bottom: 15px;
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        input,
-        textarea {
+        input {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid #ddd;
             border-radius: 4px;
             font-size: 14px;
-        }
 
-        textarea {
-            resize: vertical;
-        }
-
-        input:focus,
-        textarea:focus {
-            border-color: #007bff;
-            outline: none;
+            &amp;:focus {
+                border-color: #007bff;
+                outline: none;
+            }
         }
     }
 
-    .btn {
-        display: block;
-        width: 100%;
-        padding: 10px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        font-size: 16px;
-        cursor: pointer;
+    .expenses-table {
+        table {
+            width: 100%;
+            border-collapse: collapse;
 
-        &amp;:hover {
-            background-color: #0056b3;
+            th, td {
+                text-align: left;
+                padding: 8px;
+                border-bottom: 1px solid #ddd;
+
+                &amp;:hover {
+                    background-color: #f5f5f5;
+                }
+            }
+
+            th {
+                cursor: pointer;
+                background-color: #007bff;
+                color: white;
+            }
+
+            .no-data {
+                text-align: center;
+                font-style: italic;
+                color: #888;
+            }
         }
     }
 }
@@ -132,58 +104,98 @@
         <docs/>
         <field_list/>
         <has_preview>true</has_preview>
-        <id>group_details</id>
+        <id>group_expense_details</id>
         <internal>false</internal>
         <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
-        <name>Splitwise Group Details</name>
+        <name>Splitwise Group Expense Details</name>
         <option_schema/>
         <public>false</public>
         <roles/>
-        <script/>
+        <script><![CDATA[(function process(input, data) {
+    if (input && input.action === 'getGroupExpenses') {
+        var expenses = [];
+        var expenseGR = new GlideRecord('sn_splitwise_expenses');
+        expenseGR.query();
+
+        while (expenseGR.next()) {
+            var groupGR = new GlideRecord('sn_splitwise_groups');
+            var groupName = '';
+            if (groupGR.get(expenseGR.getValue('group'))) {
+                groupName = groupGR.getValue('name');
+            }
+
+					var paidByUserName = '';
+            var groupMemberGR = new GlideRecord('sn_splitwise_group_members'); // Reference to group_members table
+            groupMemberGR.addQuery('sys_id', expenseGR.getValue('paid_by_user')); // Match paid_by_user to group_members
+            groupMemberGR.query();
+            if (groupMemberGR.next()) {
+                var sysUserGR = new GlideRecord('sys_user'); // Fetch corresponding sys_user
+                if (sysUserGR.get(groupMemberGR.getValue('user'))) {
+                    paidByUserName = sysUserGR.getValue('name');
+                }
+            }
+
+            expenses.push({
+								number: expenseGR.getValue('number'),
+                name: expenseGR.getValue('name'),
+                description: expenseGR.getValue('description'),
+                amount: expenseGR.getValue('amount'),
+                group: groupName,
+                paidBy: paidByUserName
+            });
+        }
+
+        data.expenses = expenses;
+    }
+})(input, data);
+]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2024-12-22 16:47:21</sys_created_on>
         <sys_id>442950cb83621a10daf06e7d022bc060</sys_id>
-        <sys_mod_count>8</sys_mod_count>
-        <sys_name>Splitwise Group Details</sys_name>
+        <sys_mod_count>32</sys_mod_count>
+        <sys_name>Splitwise Group Expense Details</sys_name>
         <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
         <sys_policy/>
         <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
         <sys_update_name>sp_widget_442950cb83621a10daf06e7d022bc060</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2024-12-23 06:31:45</sys_updated_on>
-        <template><![CDATA[<div class="widget-content">
+        <sys_updated_on>2024-12-24 04:08:14</sys_updated_on>
+        <template><![CDATA[<div class="group-expenses-widget">
     <h2>Group Expenses</h2>
 
-    <!-- Expense List -->
-    <div ng-if="data.expenses.length > 0">
-        <h4>All Expenses</h4>
-        <ul>
-            <li ng-repeat="expense in data.expenses">
-                <strong>{{ expense.description }}</strong>
-                <span>- ₹{{ expense.amount }}</span>
-                <em>(Created by: {{ expense.created_by }}, {{ expense.created_on }})</em>
-            </li>
-        </ul>
-    </div>
-    <div ng-if="data.expenses.length === 0">
-        <p>No expenses found for this group.</p>
+    <div class="search-bar">
+        <input type="text" ng-model="c.searchQuery" placeholder="Search expenses..." />
     </div>
 
-    <!-- Create Expense -->
-    <h4>Create Expense</h4>
-    <form ng-submit="createExpense()">
-        <div>
-            <label>Description</label>
-            <input type="text" ng-model="data.newExpense.description" placeholder="Enter description" required>
-        </div>
-        <div>
-            <label>Amount</label>
-            <input type="number" ng-model="data.newExpense.amount" placeholder="Enter amount" required>
-        </div>
-        <button type="submit">Add Expense</button>
-    </form>
+    <div class="expenses-table">
+        <table>
+            <thead>
+                <tr>
+                  	<th ng-click="c.sort('number')">Expense#</th>
+                    <th ng-click="c.sort('name')">Name</th>
+                    <th ng-click="c.sort('description')">Description</th>
+                    <th ng-click="c.sort('amount')">Amount</th>
+                    <th ng-click="c.sort('group')">Group</th>
+                    <th ng-click="c.sort('paidBy')">Paid By</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="expense in c.filteredExpenses | filter:c.searchQuery">
+                  	<td>{{ expense.number }}</td>
+                    <td>{{ expense.name }}</td>
+                    <td>{{ expense.description }}</td>
+                    <td>{{ expense.amount | currency: '&#8377;' }}</td>
+                    <td>{{ expense.group }}</td>
+                    <td>{{ expense.paidBy }}</td>
+                </tr>
+                <tr ng-if="!c.filteredExpenses.length">
+                    <td colspan="5" class="no-data">No expenses found.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 ]]></template>
     </sp_widget>

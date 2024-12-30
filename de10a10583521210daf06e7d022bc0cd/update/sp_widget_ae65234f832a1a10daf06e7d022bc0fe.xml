@@ -23,6 +23,20 @@
                 ...member,
                 share: 0 // Initialize share for each member
             }));
+
+            // Calculate equal share for each member
+            if (c.expenseAmount && c.memberOptions.length > 0) {
+                var equalShare = Math.floor(c.expenseAmount / c.memberOptions.length); // Integer share
+                var remainder = c.expenseAmount % c.memberOptions.length; // Remainder
+
+                c.memberOptions.forEach((member, index) => {
+                    // Distribute the remainder to the first member
+                    member.share = equalShare + (index === 0 ? remainder : 0);
+                });
+
+                // Recalculate remaining share
+                c.calculateRemainingShare();
+            }
         });
     };
 
@@ -45,11 +59,11 @@
         }
 
         var distribution = c.memberOptions.map(member => {
-					return {
-            memberId: member.value,
-            share: member.share || 0
-        	}
-				});
+            return {
+                memberId: member.value,
+                share: member.share || 0
+            };
+        });
 
         c.server.get({
             action: 'addExpense',
@@ -296,14 +310,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2024-12-23 07:39:54</sys_created_on>
         <sys_id>ae65234f832a1a10daf06e7d022bc0fe</sys_id>
-        <sys_mod_count>49</sys_mod_count>
+        <sys_mod_count>51</sys_mod_count>
         <sys_name>Splitwise Add New Expense</sys_name>
         <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
         <sys_policy/>
         <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
         <sys_update_name>sp_widget_ae65234f832a1a10daf06e7d022bc0fe</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2024-12-24 02:16:08</sys_updated_on>
+        <sys_updated_on>2024-12-30 02:08:26</sys_updated_on>
         <template><![CDATA[<div class="add-expense-widget">
   <h2>Add Expense</h2>
 

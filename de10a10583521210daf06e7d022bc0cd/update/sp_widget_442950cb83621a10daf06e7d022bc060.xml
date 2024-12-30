@@ -2,100 +2,77 @@
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
         <client_script><![CDATA[function ($scope) {
-    var c = this;
+	var c = this;
 
-    // Initialize data
-    c.expenses = [];
-    c.filteredExpenses = [];
-    c.searchQuery = '';
-    c.sortKey = 'name';
-    c.reverse = false;
+	c.expenses = [];
+	c.groupedExpenses = {};
+	c.searchQuery = '';
 
-    // Fetch expenses from the server
-    c.server.get({
-        action: 'getGroupExpenses'
-    }).then(function (response) {
-        c.expenses = response.data.expenses;
-        c.filteredExpenses = [...c.expenses];
-    });
+	c.server.get({
+		action: 'getGroupExpenses'
+	}).then(function (response) {
+		c.expenses = response.data.expenses;
 
-    // Sort the expenses
-    c.sort = function (key) {
-        if (c.sortKey === key) {
-            c.reverse = !c.reverse;
-        } else {
-            c.sortKey = key;
-            c.reverse = false;
-        }
-
-        c.filteredExpenses = c.expenses.sort((a, b) => {
-            if (a[key] < b[key]) return c.reverse ? 1 : -1;
-            if (a[key] > b[key]) return c.reverse ? -1 : 1;
-            return 0;
-        });
-    };
+		c.groupedExpenses = c.expenses.reduce((acc, expense) => {
+			if (!acc[expense.group]) {
+				acc[expense.group] = [];
+			}
+			acc[expense.group].push(expense);
+			return acc;
+		}, {});
+	});
 }
 ]]></client_script>
         <controller_as>c</controller_as>
         <css>.group-expenses-widget {
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-    h2 {
-        text-align: center;
-        margin-bottom: 20px;
-        color: #333;
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #555;
+    font-size: 18px;
+  }
+
+  .expenses-grouped-table {
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      th, td {
+        text-align: left;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+
+        // &amp;:hover {
+        //     background-color: #f5f5f5;
+        // }
+      }
+
+      th {
+        background-color: #007bff;
+        color: white;
+      }
     }
+  }
 
-    .search-bar {
-        margin-bottom: 15px;
+  .no-data {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+  }
 
-        input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-
-            &amp;:focus {
-                border-color: #007bff;
-                outline: none;
-            }
-        }
-    }
-
-    .expenses-table {
-        table {
-            width: 100%;
-            border-collapse: collapse;
-
-            th, td {
-                text-align: left;
-                padding: 8px;
-                border-bottom: 1px solid #ddd;
-
-                &amp;:hover {
-                    background-color: #f5f5f5;
-                }
-            }
-
-            th {
-                cursor: pointer;
-                background-color: #007bff;
-                color: white;
-            }
-
-            .no-data {
-                text-align: center;
-                font-style: italic;
-                color: #888;
-            }
-        }
-    }
 }
 </css>
         <data_table>sp_instance</data_table>
@@ -154,48 +131,50 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2024-12-22 16:47:21</sys_created_on>
         <sys_id>442950cb83621a10daf06e7d022bc060</sys_id>
-        <sys_mod_count>32</sys_mod_count>
+        <sys_mod_count>42</sys_mod_count>
         <sys_name>Splitwise Group Expense Details</sys_name>
         <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
         <sys_policy/>
         <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
         <sys_update_name>sp_widget_442950cb83621a10daf06e7d022bc060</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2024-12-24 04:08:14</sys_updated_on>
+        <sys_updated_on>2024-12-30 02:04:18</sys_updated_on>
         <template><![CDATA[<div class="group-expenses-widget">
-    <h2>Group Expenses</h2>
+  <h2>Group Expenses</h2>
 
-    <div class="search-bar">
-        <input type="text" ng-model="c.searchQuery" placeholder="Search expenses..." />
-    </div>
+  <div class="expenses-grouped-table" ng-repeat="(group, expenses) in c.groupedExpenses">
+    
+    <h3>{{ group }}</h3>
+    <table>
+      
+      <thead>
+        <tr>
+          <th>Expense#</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Paid By</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr ng-repeat="expense in expenses">
+          <td>{{ expense.number }}</td>
+          <td>{{ expense.name }}</td>
+          <td>{{ expense.description }}</td>
+          <td>{{ expense.amount | currency: '&#8377;' }}</td>
+          <td>{{ expense.paidBy }}</td>
+        </tr>
 
-    <div class="expenses-table">
-        <table>
-            <thead>
-                <tr>
-                  	<th ng-click="c.sort('number')">Expense#</th>
-                    <th ng-click="c.sort('name')">Name</th>
-                    <th ng-click="c.sort('description')">Description</th>
-                    <th ng-click="c.sort('amount')">Amount</th>
-                    <th ng-click="c.sort('group')">Group</th>
-                    <th ng-click="c.sort('paidBy')">Paid By</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="expense in c.filteredExpenses | filter:c.searchQuery">
-                  	<td>{{ expense.number }}</td>
-                    <td>{{ expense.name }}</td>
-                    <td>{{ expense.description }}</td>
-                    <td>{{ expense.amount | currency: '&#8377;' }}</td>
-                    <td>{{ expense.group }}</td>
-                    <td>{{ expense.paidBy }}</td>
-                </tr>
-                <tr ng-if="!c.filteredExpenses.length">
-                    <td colspan="5" class="no-data">No expenses found.</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        
+        <tr ng-if="!expenses || expenses.length === 0">
+          <td colspan="5" class="no-data">
+            No expenses found for this group.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 ]]></template>
     </sp_widget>

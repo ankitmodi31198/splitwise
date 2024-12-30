@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function ($scope) {
+	var c = this;
+
+	c.distributions = [];
+
+	c.server.get({
+		action: 'getExpenseDistributions'
+	}).then(function (response) {
+		c.distributions = response.data.distributions;
+	});
+
+	c.settleExpense = function (distribution) {
+		c.server.get({
+			action: 'settleExpense',
+			distributionId: distribution.sys_id
+		}).then(function (response) {
+			if (response.data.success) {
+				// Reload the distributions after successful settlement
+				distribution.isSettled = true;
+
+				$scope.$applyAsync();
+			} else {
+				console.error(response.errorMessage);
+				alert(response.errorMessage);
+			}
+		});
+	};
+}
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.expenses-distribution-widget {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .expenses-table {
+        table {
+            width: 100%;
+            border-collapse: collapse;
+
+            th, td {
+                text-align: left;
+                padding: 8px;
+                border-bottom: 1px solid #ddd;
+
+                &amp;:hover {
+                    background-color: #f5f5f5;
+                }
+            }
+
+            th {
+                cursor: pointer;
+                background-color: #007bff;
+                color: white;
+            }
+
+            .no-data {
+                text-align: center;
+                font-style: italic;
+                color: #888;
+            }
+
+            .text-success {
+                color: #28a745;
+            }
+
+            .text-danger {
+                color: #dc3545;
+            }
+
+            .btn-primary {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                padding: 6px 12px;
+                border-radius: 4px;
+                cursor: pointer;
+
+                &amp;:hover {
+                    background-color: #0056b3;
+                }
+            }
+        }
+    }
+}
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>expense_distribution</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Splitwise Expense Distribution</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function process(input, data) {
+	if(input) {
+		if (input.action === 'getExpenseDistributions') {
+			var distributions = [];
+			var currentUserID = gs.getUserID();
+			var currentUserName = gs.getUserName();
+
+			var distGR = new GlideRecord('sn_splitwise_expense_distribution');
+			distGR.query();
+
+			while (distGR.next()) {
+				var expenseName = 'Unknown Expense';
+				var groupName = 'Unknown Group';
+				var userName = 'Unknown User';
+				var canSettle = false;
+
+				// Fetch the expense details
+				var expenseGR = new GlideRecord('sn_splitwise_expenses');
+				if (expenseGR.get(distGR.getValue('expense'))) {
+					expenseName = expenseGR.getValue('name');
+
+					// Fetch the group details
+					var groupGR = new GlideRecord('sn_splitwise_groups');
+					if (groupGR.get(expenseGR.getValue('group'))) {
+						groupName = groupGR.getValue('name');
+					}
+
+					// Check if the user is the payer of the expense
+					var payerGR = new GlideRecord('sn_splitwise_group_members');
+					if (payerGR.get(expenseGR.getValue('paid_by_user'))) {
+						canSettle = canSettle || (payerGR.getValue('user') === currentUserID);
+					}
+
+					// Check if the user is the creator of the group
+					canSettle = canSettle || (groupGR.getValue('sys_created_by') === currentUserName);
+				}
+
+				// Fetch the user details and check if the distribution is for the current user
+				var groupMemberGR = new GlideRecord('sn_splitwise_group_members');
+				if (groupMemberGR.get(distGR.getValue('group_member'))) {
+					var sysUserGR = new GlideRecord('sys_user');
+					if (sysUserGR.get(groupMemberGR.getValue('user'))) {
+						userName = sysUserGR.getValue('name');
+					}
+					canSettle = canSettle || (groupMemberGR.getValue('user') === currentUserID);
+				}
+
+				// Include the record in the results
+				distributions.push({
+					groupName: groupName,
+					expenseName: expenseName,
+					shareAmount: parseFloat(distGR.getValue('share_amount')).toFixed(2),
+					note: distGR.getValue('note'),
+					userName: userName,
+					isSettled: distGR.getValue('is_settled') === '1',
+					canSettle: canSettle,
+					sys_id: distGR.getValue('sys_id')
+				});
+			}
+
+			// Sort distributions by groupName and expenseName
+			distributions.sort(function (a, b) {
+				if (a.groupName === b.groupName) {
+					return a.expenseName.localeCompare(b.expenseName);
+				}
+				return a.groupName.localeCompare(b.groupName);
+			});
+
+			data.distributions = distributions;
+		} else if (input.action === 'settleExpense') {
+			var success = false;
+			var errorMessage = 'Failed to settle expense';
+
+			try {
+				var settleGR = new GlideRecord('sn_splitwise_expense_distribution');
+				if (settleGR.get(input.distributionId)) {
+					if (settleGR.getValue('is_settled') === '0') {
+						settleGR.setValue('is_settled', '1');
+						settleGR.update();
+						success = true;
+					} else {
+						errorMessage = 'This expense is already settled.';
+					}
+				} else {
+					errorMessage = 'Expense distribution not found.';
+				}
+			} catch (e) {
+				errorMessage = 'An error occurred while settling the expense.';
+				gs.error(e.message);
+			}
+
+			data.success = success;
+			data.errorMessage = errorMessage;
+		}
+	}
+})(input, data);
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-24 06:01:54</sys_created_on>
+        <sys_id>70985c6783ee1a10daf06e7d022bc02d</sys_id>
+        <sys_mod_count>76</sys_mod_count>
+        <sys_name>Splitwise Expense Distribution</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sp_widget_70985c6783ee1a10daf06e7d022bc02d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-27 08:18:13</sys_updated_on>
+        <template><![CDATA[<div class="expenses-distribution-widget">
+    <h2>Expense Distribution</h2>
+    <div class="expenses-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Group</th>
+                    <th>Expense Name</th>
+                    <th>Share Amount</th>
+                    <th>Note</th>
+                    <th>User</th>
+                    <th>Settled</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="dist in c.distributions">
+                    <td>{{ dist.groupName }}</td>
+                    <td>{{ dist.expenseName }}</td>
+                    <td>{{ dist.shareAmount | currency: '&#8377;' }}</td>
+                    <td>{{ dist.note }}</td>
+                    <td>{{ dist.userName }}</td>
+                    <td>
+                        <span ng-if="dist.isSettled" class="fa fa-check-circle text-success" title="Settled"></span>
+                        <span ng-if="!dist.isSettled" class="fa fa-times text-danger" title="Not Settled"></span>
+                    </td>
+                    <td>
+                        <button ng-if="!dist.isSettled && dist.canSettle" 
+                                class="btn btn-primary" 
+                                ng-click="c.settleExpense(dist)">
+                            Settle
+                        </button>
+                    </td>
+                </tr>
+                <tr ng-if="!c.distributions.length">
+                    <td colspan="7" class="no-data">No distributions found.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>70985c6783ee1a10daf06e7d022bc02d</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-24 06:01:54</sys_created_on>
+        <sys_id>30985c6783ee1a10daf06e7d022bc030</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-24 06:01:54</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

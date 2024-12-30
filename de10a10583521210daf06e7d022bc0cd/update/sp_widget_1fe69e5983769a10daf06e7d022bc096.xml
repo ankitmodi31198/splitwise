@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function ($scope, $rootScope) {
+    var c = this;
+
+    c.settlements = [];
+
+    // Load settlements records
+    c.server.get({
+        action: 'getSettlements'
+    }).then(function (response) {
+        c.settlements = response.data.settlements;
+    });
+}
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.settlements-widget {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .settlements-table {
+        table {
+            width: 100%;
+            border-collapse: collapse;
+
+            th, td {
+                text-align: left;
+                padding: 8px;
+                border-bottom: 1px solid #ddd;
+
+                &amp;:hover {
+                    background-color: #f5f5f5;
+                }
+            }
+
+            th {
+                background-color: #007bff;
+                color: white;
+            }
+
+            .no-data {
+                text-align: center;
+                font-style: italic;
+                color: #888;
+            }
+        }
+    }
+}
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>splitwise_settlements</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Splitwise Settlements</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function process(input, data) {
+    if (input && input.action === 'getSettlements') {
+        var settlements = [];
+        var currentUserID = gs.getUserID();
+
+        // GlideRecord to fetch settlements
+        var settlementGR = new GlideRecord('sn_splitwise_settlements');
+        settlementGR.query();
+
+        while (settlementGR.next()) {
+            var isUserRelated = false;
+
+            // Fetch payer and payee group members
+            var payerGroupMemberGR = new GlideRecord('sn_splitwise_group_members');
+            var payeeGroupMemberGR = new GlideRecord('sn_splitwise_group_members');
+
+            if (payerGroupMemberGR.get(settlementGR.getValue('payer_group_member')) && 
+                payerGroupMemberGR.getValue('user') === currentUserID) {
+                isUserRelated = true;
+            }
+
+            if (payeeGroupMemberGR.get(settlementGR.getValue('payee_group_member')) && 
+                payeeGroupMemberGR.getValue('user') === currentUserID) {
+                isUserRelated = true;
+            }
+
+            // Fetch the expense distribution
+            var expenseDistributionGR = new GlideRecord('sn_splitwise_expense_distribution');
+            if (expenseDistributionGR.get(settlementGR.getValue('expense_distribution'))) {
+                var groupMemberGR = new GlideRecord('sn_splitwise_group_members');
+                if (groupMemberGR.get(expenseDistributionGR.getValue('group_member')) &&
+                    groupMemberGR.getValue('user') === currentUserID) {
+                    isUserRelated = true;
+                }
+
+                // Fetch the group associated with the expense
+                var expenseGR = new GlideRecord('sn_splitwise_expenses');
+                if (expenseGR.get(expenseDistributionGR.getValue('expense'))) {
+                    var groupGR = new GlideRecord('sn_splitwise_groups');
+                    if (groupGR.get(expenseGR.getValue('group'))) {
+                        var groupMemberQueryGR = new GlideRecord('sn_splitwise_group_members');
+                        groupMemberQueryGR.addQuery('group', groupGR.getValue('sys_id'));
+                        groupMemberQueryGR.addQuery('user', currentUserID);
+                        groupMemberQueryGR.query();
+                        if (groupMemberQueryGR.hasNext()) {
+                            isUserRelated = true;
+                        }
+                    }
+                }
+            }
+
+            // Add settlement to the result if the user is related
+            if (isUserRelated) {
+                var payerName = 'Unknown';
+                var payeeName = 'Unknown';
+                var note = settlementGR.getValue('note') || 'No Note';
+
+                // Fetch payer name
+                if (payerGroupMemberGR.isValidRecord()) {
+                    var payerUserGR = new GlideRecord('sys_user');
+                    if (payerUserGR.get(payerGroupMemberGR.getValue('user'))) {
+                        payerName = payerUserGR.getValue('name');
+                    }
+                }
+
+                // Fetch payee name
+                if (payeeGroupMemberGR.isValidRecord()) {
+                    var payeeUserGR = new GlideRecord('sys_user');
+                    if (payeeUserGR.get(payeeGroupMemberGR.getValue('user'))) {
+                        payeeName = payeeUserGR.getValue('name');
+                    }
+                }
+
+                // Add the settlement record
+                settlements.push({
+                    id: settlementGR.getUniqueValue(),
+                    note: note,
+                    paidAmount: parseFloat(settlementGR.getValue('paid_amount')).toFixed(2),
+                    payerName: payerName,
+                    payeeName: payeeName,
+                    updatedOn: settlementGR.getDisplayValue('sys_updated_on')
+                });
+            }
+        }
+
+        data.settlements = settlements;
+    }
+})(input, data);
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-30 01:43:19</sys_created_on>
+        <sys_id>1fe69e5983769a10daf06e7d022bc096</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Splitwise Settlements</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sp_widget_1fe69e5983769a10daf06e7d022bc096</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-30 01:52:30</sys_updated_on>
+        <template><![CDATA[<div class="settlements-widget">
+    <h2>Settlements</h2>
+
+    <div class="settlements-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Payer</th>
+                    <th>Payee</th>
+                    <th>Note</th>
+                    <th>Amount</th>
+                    <th>Updated On</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="settlement in c.settlements">
+                    <td>{{ settlement.payerName }}</td>
+                    <td>{{ settlement.payeeName }}</td>
+                    <td>{{ settlement.note }}</td>
+                    <td>{{ settlement.paidAmount | currency: '&#8377;' }}</td>
+                    <td>{{ settlement.updatedOn }}</td>
+                </tr>
+                <tr ng-if="!c.settlements.length">
+                    <td colspan="5" class="no-data">No settlements found.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+]]></template>
+    </sp_widget>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>1fe69e5983769a10daf06e7d022bc096</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-30 01:43:19</sys_created_on>
+        <sys_id>17e69e5983769a10daf06e7d022bc09a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-12-30 01:43:19</sys_updated_on>
+        <table>sp_widget</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

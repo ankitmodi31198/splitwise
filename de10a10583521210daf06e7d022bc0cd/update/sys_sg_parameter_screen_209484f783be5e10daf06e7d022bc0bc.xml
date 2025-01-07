@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_parameter_screen">
+    <sys_sg_parameter_screen action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <advanced>true</advanced>
+        <available_offline>false</available_offline>
+        <cancel_label>Cancel</cancel_label>
+        <description/>
+        <dynamic_prefetch_count/>
+        <empty_state/>
+        <fetch_type>not_required</fetch_type>
+        <filter/>
+        <header_only_on_first_page>false</header_only_on_first_page>
+        <hide_filters>false</hide_filters>
+        <hide_screen_name>false</hide_screen_name>
+        <icon/>
+        <name>Create a New Group only</name>
+        <next_label>Next</next_label>
+        <pagination_type>all</pagination_type>
+        <presentation_style>modal</presentation_style>
+        <prev_label>Previous</prev_label>
+        <reset_after_submit>true</reset_after_submit>
+        <resume>false</resume>
+        <roles_override/>
+        <show_unsaved_changes_confirmation_message>false</show_unsaved_changes_confirmation_message>
+        <submit_label>Submit</submit_label>
+        <sys_class_name>sys_sg_parameter_screen</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-01-06 09:28:41</sys_created_on>
+        <sys_id>209484f783be5e10daf06e7d022bc0bc</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>Create a New Group only</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sys_sg_parameter_screen_209484f783be5e10daf06e7d022bc0bc</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-01-07 02:01:12</sys_updated_on>
+        <track_input_updates_timestamps>false</track_input_updates_timestamps>
+        <type display_value="">string</type>
+        <unsaved_changes_cancel_button_label>Stay</unsaved_changes_cancel_button_label>
+        <unsaved_changes_confirm_button_label>Leave</unsaved_changes_confirm_button_label>
+        <unsaved_changes_confirmation_message_body>Are you sure you want to leave this page? Changes you made will not be saved.</unsaved_changes_confirmation_message_body>
+        <unsaved_changes_confirmation_message_title>You have unsaved changes</unsaved_changes_confirmation_message_title>
+        <view_config/>
+    </sys_sg_parameter_screen>
+    <sys_translated_text action="delete_multiple" query="documentkey=209484f783be5e10daf06e7d022bc0bc"/>
+</record_update>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_write_back_action_item">
+    <sys_sg_write_back_action_item action="INSERT_OR_UPDATE">
+        <description/>
+        <execution_script><![CDATA[(function WriteBackAction(input) {
+    
+    // Log the input for debugging
+    gs.info('Input data: ' + JSON.stringify(input));
+
+    // Validate input
+    // if (!input || !input.name) {
+    //     gs.error('Group name is required.');
+    //     return;
+    // }
+
+    try {
+        // Create a new record in the "sn_splitwise_groups" table
+        var gr = new GlideRecord('sn_splitwise_groups');
+        gr.initialize();
+        gr.setValue('name', input.name);
+        gr.setValue('description', input.description || ''); // Use empty string if no description
+        gr.setValue('created_by', gs.getUserID());
+        var groupSysId = gr.insert();
+
+        if (groupSysId) {
+            gs.info('Group created successfully with Sys ID: ' + groupSysId);
+        } else {
+            gs.error('Failed to create group.');
+        }
+    } catch (error) {
+        gs.error('Error in WriteBackAction: ' + error.message);
+    }
+});
+]]></execution_script>
+        <name>Create a new Group Only</name>
+        <parameter_screen display_value="Create a New Group only">209484f783be5e10daf06e7d022bc0bc</parameter_screen>
+        <query_condition/>
+        <sys_class_name>sys_sg_write_back_action_item</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-01-06 09:31:54</sys_created_on>
+        <sys_id>6f4548f783be5e10daf06e7d022bc0b8</sys_id>
+        <sys_mod_count>10</sys_mod_count>
+        <sys_name>Create a new Group Only</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sys_sg_write_back_action_item_6f4548f783be5e10daf06e7d022bc0b8</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-01-06 23:41:06</sys_updated_on>
+        <table>sn_splitwise_groups</table>
+        <template>name={{Input: name}}^description={{Input: description}}^EQ</template>
+        <type>new</type>
+        <use_current_record_as_condition>true</use_current_record_as_condition>
+        <use_fields_for_ref_lookup>false</use_fields_for_ref_lookup>
+    </sys_sg_write_back_action_item>
+    <sys_translated_text action="delete_multiple" query="documentkey=6f4548f783be5e10daf06e7d022bc0b8"/>
+</record_update>

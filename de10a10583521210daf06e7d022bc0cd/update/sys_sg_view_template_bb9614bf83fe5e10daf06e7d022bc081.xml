@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_view_template">
+    <sys_sg_view_template action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description>Splitwise Group Epense</description>
+        <name>Splitwise Group Expense</name>
+        <preview_image/>
+        <root_view_attrs_json/>
+        <sys_class_name>sys_sg_view_template</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-01-06 10:47:34</sys_created_on>
+        <sys_id>bb9614bf83fe5e10daf06e7d022bc081</sys_id>
+        <sys_mod_count>22</sys_mod_count>
+        <sys_name>Splitwise Group Expense</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sys_sg_view_template_bb9614bf83fe5e10daf06e7d022bc081</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-01-07 01:59:26</sys_updated_on>
+        <template_json>{"Type":"ViewGroup","Margin":{"Top":15,"Bottom":17},"Orientation":"Vertical","Alignment":"Left","Distribution":"Auto","Id":"Root","Children":[{"Type":"ViewGroup","Orientation":"Vertical","Alignment":"Stretch","Distribution":"Auto","Id":"container_05","CellId":"container_05","Children":[{"Type":"ViewGroup","Orientation":"Vertical","Alignment":"Stretch","Distribution":"Auto","Id":"container_06","CellId":"container_06","Children":[{"Type":"Text","TextColor":"#151920","MaxLines":1,"Id":"text_01","CellId":"text_01"}]},{"Type":"ViewGroup","Orientation":"Vertical","Alignment":"Stretch","Distribution":"Auto","Id":"container_07","CellId":"container_07","Children":[{"Type":"ViewGroup","Orientation":"Horizontal","Alignment":"Stretch","Distribution":"Auto","Id":"container_08","CellId":"container_08","Margin":{"Top":2},"Width":900,"Children":[{"Type":"Text","TextColor":"#151920","MaxLines":1,"Id":"text_07","CellId":"text_07","TextAlignment":"Left","Margin":{"Right":2},"Width":245},{"Type":"Text","TextColor":"#151920","MaxLines":1,"Id":"text_08","CellId":"text_08","TextAlignment":"Left","Width":500}]},{"Type":"ViewGroup","Orientation":"Horizontal","Alignment":"Stretch","Distribution":"Auto","Id":"container_09","CellId":"container_09","Margin":{"Top":2},"Children":[{"Type":"Text","TextColor":"#151920","MaxLines":1,"Id":"text_10","CellId":"text_10","TextAlignment":"Left","Margin":{"Right":2},"Width":245},{"Type":"Text","TextColor":"#151920","MaxLines":1,"Id":"text_11","CellId":"text_11","TextAlignment":"Left","Width":500}]},{"Type":"ViewGroup","Orientation":"Horizontal","Alignment":"Stretch","Distribution":"Auto","Id":"container_10","CellId":"container_10","Margin":{"Top":2},"Children":[{"Type":"Text","TextColor":"#151920","MaxLines":1,"Id":"text_12","CellId":"text_12","TextAlignment":"Left","Margin":{"Right":2},"Width":245},{"Type":"Text","TextColor":"#151920","MaxLines":1,"Id":"text_13","CellId":"text_13","TextAlignment":"Left","Width":500}]},{"Type":"ViewGroup","Orientation":"Horizontal","Alignment":"Stretch","Distribution":"Auto","Id":"container_11","CellId":"container_11","Margin":{"Top":2},"Children":[{"Type":"Text","TextColor":"#151920","MaxLines":1,"Id":"text_14","CellId":"text_14","TextAlignment":"Left","Margin":{"Right":2},"Width":245},{"Type":"Text","TextColor":"#151920","MaxLines":1,"Id":"text_15","CellId":"text_15","TextAlignment":"Left","Width":500}]},{"Type":"ViewGroup","Orientation":"Horizontal","Alignment":"Stretch","Distribution":"Auto","Id":"container_12","CellId":"container_12","Margin":{"Top":2},"Children":[{"Type":"Text","TextColor":"#151920","MaxLines":1,"Id":"text_16","CellId":"text_16","TextAlignment":"Left","Margin":{"Right":2},"Width":245},{"Type":"Text","TextColor":"#151920","MaxLines":1,"Id":"text_17","CellId":"text_17","TextAlignment":"Left","Width":500}]}]}]}]}</template_json>
+    </sys_sg_view_template>
+    <sys_translated_text action="delete_multiple" query="documentkey=bb9614bf83fe5e10daf06e7d022bc081"/>
+</record_update>

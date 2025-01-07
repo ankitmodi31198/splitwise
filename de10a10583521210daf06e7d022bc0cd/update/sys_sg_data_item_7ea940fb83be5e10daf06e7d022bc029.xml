@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_data_item">
+    <sys_sg_data_item action="INSERT_OR_UPDATE">
+        <condition_type>script</condition_type>
+        <description/>
+        <group_by/>
+        <instance_relative_url_qc/>
+        <name>Group Expenses</name>
+        <offline_query_condition/>
+        <offline_query_condition_script/>
+        <query_condition/>
+        <query_condition_script><![CDATA[(function getQueryString(input) {
+    // Fetch the logged-in user's sys_id
+    var loggedInUserId = gs.getUserID();
+    var groupIds = [];
+
+    // Query the 'sn_splitwise_group_members' table to get groups the user belongs to
+    var groupMembers = new GlideRecord('sn_splitwise_group_members');
+    groupMembers.addQuery('user', loggedInUserId); // Match the user
+    groupMembers.query();
+
+    while (groupMembers.next()) {
+        groupIds.push(groupMembers.getValue('group')); // Collect group sys_ids
+    }
+
+    // If the user belongs to any groups, construct the query
+    if (groupIds.length > 0) {
+        var queryString = 'groupIN' + groupIds.join(',');
+        return queryString; // Return the query string for the expenses table
+    }
+
+    // If no groups are found, return an empty string (no access)
+    return '';
+})(input);
+]]></query_condition_script>
+        <sys_class_name>sys_sg_data_item</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-01-06 09:50:58</sys_created_on>
+        <sys_id>7ea940fb83be5e10daf06e7d022bc029</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>Group Expenses</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sys_sg_data_item_7ea940fb83be5e10daf06e7d022bc029</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-01-07 01:48:12</sys_updated_on>
+        <table>sn_splitwise_expenses</table>
+    </sys_sg_data_item>
+    <sys_translated_text action="delete_multiple" query="documentkey=7ea940fb83be5e10daf06e7d022bc029"/>
+</record_update>

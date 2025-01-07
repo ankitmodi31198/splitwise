@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_input">
+    <sys_sg_input action="DELETE">
+        <active>true</active>
+        <autofill_variable/>
+        <category/>
+        <description/>
+        <label>Add Users</label>
+        <mandatory>true</mandatory>
+        <name>users</name>
+        <order/>
+        <page/>
+        <parameter_screen display_value="Create a New Group">ab1f53ab83fa5e10daf06e7d022bc076</parameter_screen>
+        <parameter_section/>
+        <placeholder/>
+        <readonly>false</readonly>
+        <sys_class_name>sys_sg_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-01-06 07:16:05</sys_created_on>
+        <sys_id>8a36e7e3833e5e10daf06e7d022bc0cf</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Add Users</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sys_sg_input_8a36e7e3833e5e10daf06e7d022bc0cf</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-01-06 09:26:38</sys_updated_on>
+        <type display_value="Reference">770c605517021010f2b43b9fadb95900</type>
+    </sys_sg_input>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</application>
+        <file_path/>
+        <instance_id>add57f3000521210ac1fc988b26642fa</instance_id>
+        <instance_name>glide_db_dump</instance_name>
+        <name>sys_sg_input_8a36e7e3833e5e10daf06e7d022bc0cf</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_input"><sys_sg_input action="INSERT_OR_UPDATE"><active>true</active><autofill_variable/><category/><description/><label>Add Users</label><mandatory>true</mandatory><name>users</name><order/><page/><parameter_screen display_value="Create a New Group">ab1f53ab83fa5e10daf06e7d022bc076</parameter_screen><parameter_section/><placeholder/><readonly>false</readonly><sys_class_name>sys_sg_input</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2025-01-06 07:16:05</sys_created_on><sys_id>8a36e7e3833e5e10daf06e7d022bc0cf</sys_id><sys_mod_count>1</sys_mod_count><sys_name>Add Users</sys_name><sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package><sys_policy/><sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope><sys_update_name>sys_sg_input_8a36e7e3833e5e10daf06e7d022bc0cf</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2025-01-06 09:26:38</sys_updated_on><type display_value="Reference">770c605517021010f2b43b9fadb95900</type></sys_sg_input></record_update>]]></payload>
+        <payload_hash>1430445751</payload_hash>
+        <record_name>Add Users</record_name>
+        <reverted_from/>
+        <source>06d1d7f583ae9610daf06e7d022bc033</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-01-06 09:26:38</sys_created_on>
+        <sys_id>da1408b783be5e10daf06e7d022bc020</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1943af00e3a0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-01-06 09:26:38</sys_updated_on>
+        <type>Input</type>
+        <update_guid>921408b75abe5e10191d508864c3dd20</update_guid>
+        <update_guid_history>921408b75abe5e10191d508864c3dd20:1430445751,ce36e7e3723e5e10f57ce9ff215c71d2:-1779370027</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-01-06 23:53:20</sys_created_on>
+        <sys_db_object display_value="" name="sys_sg_input">sys_sg_input</sys_db_object>
+        <sys_id>162eeebc12694355831154587fece8f9</sys_id>
+        <sys_metadata>8a36e7e3833e5e10daf06e7d022bc0cf</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Add Users</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_scope_delete display_value="">1bbf902f56684a4e8bdca6050439e3c4</sys_scope_delete>
+        <sys_update_name>sys_sg_input_8a36e7e3833e5e10daf06e7d022bc0cf</sys_update_name>
+        <sys_update_version display_value="sys_sg_input_8a36e7e3833e5e10daf06e7d022bc0cf">da1408b783be5e10daf06e7d022bc020</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-01-06 23:53:20</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

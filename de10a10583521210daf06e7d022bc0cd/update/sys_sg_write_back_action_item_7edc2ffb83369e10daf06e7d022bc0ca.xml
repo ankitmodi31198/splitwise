@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_write_back_action_item">
+    <sys_sg_write_back_action_item action="INSERT_OR_UPDATE">
+        <description/>
+        <execution_script><![CDATA[(function WriteBackAction(parm_input, parm_variable) {
+    // Validate input
+    if (!parm_input) {
+        gs.error("Input data is missing.");
+        return;
+    }
+
+    if (!parm_input.name || !parm_input.amount || !parm_input.group || !parm_input.paid_by_user || !parm_input.distribution) {
+        gs.error("Missing required fields: name, amount, group, paidBy, or distribution.");
+        return;
+    }
+
+    try {
+        // Add Expense record
+        var expenseGR = new GlideRecord('sn_splitwise_expenses');
+        expenseGR.initialize();
+        expenseGR.setValue('name', parm_input.name);
+        expenseGR.setValue('description', parm_input.description || "");
+        expenseGR.setValue('amount', parm_input.amount);
+        expenseGR.setValue('group', parm_input.group);
+        expenseGR.setValue('paid_by_user', parm_input.paid_by_user);
+        var expenseSysId = expenseGR.insert();
+
+        // Add Distribution records
+        parm_input.distribution.forEach(function(distribution) {
+            if (distribution.share && distribution.memberId) {
+                var distributionGR = new GlideRecord('sn_splitwise_expense_distribution');
+                distributionGR.initialize();
+                distributionGR.setValue('expense', expenseSysId);
+                distributionGR.setValue('group_member', distribution.memberId);
+                distributionGR.setValue('share_amount', distribution.share);
+                distributionGR.setValue('sys_created_by', gs.getUserID());
+                distributionGR.insert();
+            }
+        });
+
+        // Update response variable (optional)
+        parm_variable.response = { success: true, message: "Expense record created successfully." };
+
+        // Log success
+        gs.info("Expense record created successfully with Sys ID: " + expenseSysId);
+    } catch (error) {
+        // Log error
+        gs.error("Error while creating expense record: " + error.message);
+
+        // Update response variable with error details
+        parm_variable.response = { success: false, message: error.message };
+    }
+})(parm_input, parm_variable);
+]]></execution_script>
+        <name>Add Expense</name>
+        <parameter_screen display_value="Add Expense">1119aff783369e10daf06e7d022bc082</parameter_screen>
+        <query_condition/>
+        <sys_class_name>sys_sg_write_back_action_item</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-01-07 02:23:34</sys_created_on>
+        <sys_id>7edc2ffb83369e10daf06e7d022bc0ca</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>Add Expense</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sys_sg_write_back_action_item_7edc2ffb83369e10daf06e7d022bc0ca</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-01-07 06:56:27</sys_updated_on>
+        <table>sn_splitwise_expenses</table>
+        <template>name=ABC^description=ABC^group=^paid_by_user=^amount=100^EQ</template>
+        <type>script</type>
+        <use_current_record_as_condition>true</use_current_record_as_condition>
+        <use_fields_for_ref_lookup>false</use_fields_for_ref_lookup>
+    </sys_sg_write_back_action_item>
+    <sys_translated_text action="delete_multiple" query="documentkey=7edc2ffb83369e10daf06e7d022bc0ca"/>
+</record_update>

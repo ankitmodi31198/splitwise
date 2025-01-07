@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_input_attribute">
+    <sys_sg_input_attribute action="INSERT_OR_UPDATE">
+        <input display_value="Amount">e4b9a37b83369e10daf06e7d022bc0b5</input>
+        <name>Min</name>
+        <sys_class_name>sys_sg_input_attribute</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-01-07 02:09:46</sys_created_on>
+        <sys_id>b4b9a37b83369e10daf06e7d022bc0b8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Min</sys_name>
+        <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
+        <sys_update_name>sys_sg_input_attribute_b4b9a37b83369e10daf06e7d022bc0b8</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-01-07 02:09:46</sys_updated_on>
+        <value>1</value>
+    </sys_sg_input_attribute>
+</record_update>

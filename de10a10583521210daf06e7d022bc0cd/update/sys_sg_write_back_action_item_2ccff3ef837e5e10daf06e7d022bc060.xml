@@ -1,7 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_sg_write_back_action_item">
     <sys_sg_write_back_action_item action="INSERT_OR_UPDATE">
         <description/>
-        <execution_script/>
+        <execution_script><![CDATA[// (function WriteBackAction(input) {
+//     // Validate the input parameters
+//     if (!input || !input.name || !input.users || input.users.length === 0) {
+//         return {
+//             status: 'error',
+//             message: 'Group name and at least one user are required.'
+//         };
+//     }
+
+//     try {
+//         // Step 1: Create the Group Record
+//         var groupRecord = new GlideRecord('sn_splitwise_groups');
+//         groupRecord.initialize();
+//         groupRecord.setValue('name', input.name);
+//         groupRecord.setValue('description', input.description || '');
+//         groupRecord.setValue('sys_created_by', gs.getUser().getID());
+//         var groupSysId = groupRecord.insert();
+
+//         // Step 2: Add Members to the Group
+//         input.users.forEach(function(userId) {
+//             var groupMemberRecord = new GlideRecord('sn_splitwise_group_members');
+//             groupMemberRecord.initialize();
+//             groupMemberRecord.setValue('group', groupSysId);
+//             groupMemberRecord.setValue('user', userId);
+//             groupMemberRecord.setValue('sys_created_by', gs.getUser().getID());
+//             groupMemberRecord.insert();
+//         });
+
+//         // Step 3: Return Success Response
+//         return {
+//             status: 'success',
+//             message: 'Group created successfully!',
+//             groupSysId: groupSysId
+//         };
+//     } catch (error) {
+//         // Handle errors gracefully
+//         gs.error('Error creating group: ' + error.message);
+//         return {
+//             status: 'error',
+//             message: 'An unexpected error occurred. Please try again later.'
+//         };
+//     }
+// })(input);
+
+
+(function WriteBackAction(parm_input, parm_variable) {
+    // Validate the input parameters
+    if (!parm_input || !parm_input.name || !parm_input.users || parm_input.users.length === 0) {
+        return {
+            status: 'error',
+            message: 'Group name and at least one user are required.'
+        };
+    }
+
+    try {
+        // Step 1: Create the Group Record
+        var groupRecord = new GlideRecord('sn_splitwise_groups');
+        groupRecord.initialize();
+        groupRecord.setValue('name', parm_input.name);
+        groupRecord.setValue('description', parm_input.description || '');
+        groupRecord.setValue('sys_created_by', gs.getUser().getID());
+        var groupSysId = groupRecord.insert();
+
+        // Step 2: Add Members to the Group
+        parm_input.users.forEach(function(userId) {
+            var groupMemberRecord = new GlideRecord('sn_splitwise_group_members');
+            groupMemberRecord.initialize();
+            groupMemberRecord.setValue('group', groupSysId);
+            groupMemberRecord.setValue('user', userId);
+            groupMemberRecord.setValue('sys_created_by', gs.getUser().getID());
+            groupMemberRecord.insert();
+        });
+
+        // Step 3: Return Success Response
+        return {
+            status: 'success',
+            message: 'Group created successfully!',
+            groupSysId: groupSysId
+        };
+    } catch (error) {
+        // Handle errors gracefully
+        gs.error('Error creating group: ' + error.message);
+        return {
+            status: 'error',
+            message: 'An unexpected error occurred. Please try again later.'
+        };
+    }
+})(parm_input, parm_variable);]]></execution_script>
         <name>Create a new Group</name>
         <parameter_screen display_value="Create a New Group">ab1f53ab83fa5e10daf06e7d022bc076</parameter_screen>
         <query_condition/>
@@ -9,17 +96,17 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2025-01-06 09:07:40</sys_created_on>
         <sys_id>2ccff3ef837e5e10daf06e7d022bc060</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_name>Create a new Group</sys_name>
         <sys_package display_value="Splitwise" source="sn_splitwise">de10a10583521210daf06e7d022bc0cd</sys_package>
         <sys_policy/>
         <sys_scope display_value="Splitwise">de10a10583521210daf06e7d022bc0cd</sys_scope>
         <sys_update_name>sys_sg_write_back_action_item_2ccff3ef837e5e10daf06e7d022bc060</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2025-01-06 23:55:03</sys_updated_on>
+        <sys_updated_on>2025-01-07 06:09:52</sys_updated_on>
         <table>sn_splitwise_groups</table>
         <template>name={{Input: name}}^description={{Input: description}}^EQ</template>
-        <type>new</type>
+        <type>script</type>
         <use_current_record_as_condition>true</use_current_record_as_condition>
         <use_fields_for_ref_lookup>false</use_fields_for_ref_lookup>
     </sys_sg_write_back_action_item>
